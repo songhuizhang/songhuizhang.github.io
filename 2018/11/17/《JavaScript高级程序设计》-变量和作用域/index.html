@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>《JavaScript高级程序设计》---变量和作用域 | 橙汁菌的小屋</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在JavaScript中变量是松散类型，只是在特定时间保存特定的值的一个名字而已。但是由变量引出的一些问题就很有意思也很重要了，如：作用域链，变量提升，变量的拷贝。   前言在《JavaScript高级程序设计》（第三版）中，变量类型分为基本类型和引用类型两种，ES6的新增类型以后再谈。  基本数据类型：undefined、null、boolean、number、string是按值访问的。 引用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《JavaScript高级程序设计》---变量和作用域">
+<meta property="og:url" content="http://yoursite.com/2018/11/17/《JavaScript高级程序设计》-变量和作用域/index.html">
+<meta property="og:site_name" content="橙汁菌的小屋">
+<meta property="og:description" content="在JavaScript中变量是松散类型，只是在特定时间保存特定的值的一个名字而已。但是由变量引出的一些问题就很有意思也很重要了，如：作用域链，变量提升，变量的拷贝。   前言在《JavaScript高级程序设计》（第三版）中，变量类型分为基本类型和引用类型两种，ES6的新增类型以后再谈。  基本数据类型：undefined、null、boolean、number、string是按值访问的。 引用">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://s1.ax1x.com/2018/11/16/ixKnj1.png">
+<meta property="og:updated_time" content="2018-11-17T14:35:00.609Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《JavaScript高级程序设计》---变量和作用域">
+<meta name="twitter:description" content="在JavaScript中变量是松散类型，只是在特定时间保存特定的值的一个名字而已。但是由变量引出的一些问题就很有意思也很重要了，如：作用域链，变量提升，变量的拷贝。   前言在《JavaScript高级程序设计》（第三版）中，变量类型分为基本类型和引用类型两种，ES6的新增类型以后再谈。  基本数据类型：undefined、null、boolean、number、string是按值访问的。 引用">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/11/16/ixKnj1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="橙汁菌的小屋" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">橙汁菌的小屋</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <!-- 
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+         -->
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-《JavaScript高级程序设计》-变量和作用域" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/17/《JavaScript高级程序设计》-变量和作用域/" class="article-date">
+  <time datetime="2018-11-17T14:03:12.000Z" itemprop="datePublished">2018-11-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      《JavaScript高级程序设计》---变量和作用域
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>在JavaScript中变量是松散类型，只是在特定时间保存特定的值的一个名字而已。但是由变量引出的一些问题就很有意思也很重要了，如：作用域链，变量提升，变量的拷贝。</p>
+</blockquote>
+<hr>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在《JavaScript高级程序设计》（第三版）中，变量类型分为基本类型和引用类型两种，ES6的新增类型以后再谈。</p>
+<ul>
+<li>基本数据类型：undefined、null、boolean、number、string是按值访问的。</li>
+<li>引用类型是按照引用地址访问的，此类型可以动态的添加属性</li>
+</ul>
+<h2 id="变量的复制"><a href="#变量的复制" class="headerlink" title="变量的复制"></a>变量的复制</h2><h3 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h3><p>此类的复制，就只把改变了的值复制到新分配的变量位置上<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var num1 = 5;</span><br><span class="line">var num2 = num1;</span><br></pre></td></tr></table></figure></p>
+<p>上面的代码在栈内存中实际的过程是</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">num1</td>
+<td style="text-align:center">5</td>
+</tr>
+</tbody>
+</table>
+<p><strong>复制后</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">num1</td>
+<td style="text-align:center">5</td>
+</tr>
+<tr>
+<td style="text-align:center">num2</td>
+<td style="text-align:center">5</td>
+</tr>
+</tbody>
+</table>
+<h3 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h3><p>此类的复制，就是栈内存中值的副本实际上是堆内存一个对象的指针，复制后新老变量实际将引用同一个对象。因此，改变其中一个变量，另一个也会改变；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var obj1 = new Object( );</span><br><span class="line">var obj2 = obj1;</span><br><span class="line">obj1.name = &quot;张三&quot;;</span><br><span class="line">alert( obj2.name );  //  &quot;张三&quot;</span><br></pre></td></tr></table></figure>
+<p>下图表示了变量的对应关系<br><img src="https://s1.ax1x.com/2018/11/16/ixKnj1.png" alt="引用型"></p>
+<h2 id="传递参数"><a href="#传递参数" class="headerlink" title="传递参数"></a>传递参数</h2><blockquote>
+<p>在JavaScript中所有函数的参数都是按值传递的，也就是说把值从一个变量复制到另一个变量。</p>
+</blockquote>
+<p>基本类型的变量没得说，关键就是引用变量的传递。</p>
+<p>引用变量的传递会把这个值对应内存中的地址复制给一个局部变量，因此在内部修改该局部变量，外部的对应变量也会修改。对应代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function setName( obj ) &#123;</span><br><span class="line">   obj.name = &quot;张三&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var person = new Object( );</span><br><span class="line">setName( person );</span><br><span class="line">console.log(person.name);   //  &quot;张三&quot;</span><br></pre></td></tr></table></figure>
+<p>当在函数内部重写obj是，这一个变量引用的就是一个局部变量了，这个局部变量在函数执行完毕后便会立即销毁。</p>
+<blockquote>
+<p>正常来说可以把函数的参数想像成局部变量</p>
+</blockquote>
+<h2 id="检验变量类型"><a href="#检验变量类型" class="headerlink" title="检验变量类型"></a>检验变量类型</h2><p>使用typeof操作符可以检验变量是字符串、数值、布尔值、还是undefined的最佳工具；</p>
+<p><code>typeof 变量 ==》 字符串：string、boolean、number、undefined、object</code></p>
+<p>使用instanceof操作符可以用来检验引用类型的对象是具体的什么对象。</p>
+<p><code>variable instanceof constructor  ==》 布尔值： true、false；</code></p>
+<p>最优检验法：</p>
+<p><code>Object.prototype.toString.call(变量).slice(8, -1);  ==》 字符串：object、string、arrat、number、boolean、nudefined</code></p>
+<h2 id="执行环境"><a href="#执行环境" class="headerlink" title="执行环境"></a>执行环境</h2><p>执行环境定义了变量或函数有权访问其它的数据，决定了他们各自的行为；</p>
+<p>这里有几种穿件的执行环境：</p>
+<ul>
+<li>web浏览器中全局执行环境指的是window对象；</li>
+<li>函数都有自己的执行环境，函数的形参的执行环境也是函数执行环境；</li>
+</ul>
+<h2 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h2><p>当代码在一个环境中执行的时候，会创建变量对象的一个作用域链，它的作用是<strong>保证</strong>对执行环境有权访问的所有变量和函数的有序访问；</p>
+<p>作用域链是由内向外一直到全局执行环境的一个访问关系；在任何环境下都不能向下搜索作用域从而进入另一个执行环境；</p>
+<blockquote>
+<p>每次进入一个新的执行环境，都会创建一个用于搜索变量和函数的作用域链</p>
+</blockquote>
+<h3 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h3><p>这一部分在es6中，有关键字const和let创建的变量都拥有块级作用域。这里不细致展开；</p>
+<blockquote>
+<p>在JavaScript中一定要遵循先申明后引用的规则。</p>
+</blockquote>
+<hr>
+<p>以上就是对于变量和作用域的总结。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/11/17/《JavaScript高级程序设计》-变量和作用域/" data-id="cjolk0mjj0000snw7yflzd0br" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/11/16/关于需求的理解和解决方案的选择漫谈/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">关于需求的理解和解决方案的选择漫谈</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/11/17/《JavaScript高级程序设计》-变量和作用域/">《JavaScript高级程序设计》---变量和作用域</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/16/关于需求的理解和解决方案的选择漫谈/">关于需求的理解和解决方案的选择漫谈</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/15/程序员的腰/">秋，腰，自律</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/14/《JavaScript高级程序设计》-基本概念/">《JavaScript高级程序设计》---基本概念</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/13/Markdown的使用/">Markdown的使用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 橙汁菌<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
