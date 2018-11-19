@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>《JavaScript高级程序设计》---引用类型 | 橙汁菌的小屋</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="引用类型的值是引用类型的一个实例。对象是某个引用类型的实例。新对象是使用new操作符后跟一个构造函数来创建的。构造函数本身就是一个函数，只不过它的目的是出于创建一个新对象。 1var person = new Object ( ); 使用构造函数Object为新对象定义了默认的属性和方法。Object 类型Object 是 JavaScript 中使用最多的一个类型，创建object实例的方式有两">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《JavaScript高级程序设计》---引用类型">
+<meta property="og:url" content="http://yoursite.com/2018/11/19/《JavaScript高级程序设计》-引用类型/index.html">
+<meta property="og:site_name" content="橙汁菌的小屋">
+<meta property="og:description" content="引用类型的值是引用类型的一个实例。对象是某个引用类型的实例。新对象是使用new操作符后跟一个构造函数来创建的。构造函数本身就是一个函数，只不过它的目的是出于创建一个新对象。 1var person = new Object ( ); 使用构造函数Object为新对象定义了默认的属性和方法。Object 类型Object 是 JavaScript 中使用最多的一个类型，创建object实例的方式有两">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-11-19T13:05:15.913Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《JavaScript高级程序设计》---引用类型">
+<meta name="twitter:description" content="引用类型的值是引用类型的一个实例。对象是某个引用类型的实例。新对象是使用new操作符后跟一个构造函数来创建的。构造函数本身就是一个函数，只不过它的目的是出于创建一个新对象。 1var person = new Object ( ); 使用构造函数Object为新对象定义了默认的属性和方法。Object 类型Object 是 JavaScript 中使用最多的一个类型，创建object实例的方式有两">
+  
+    <link rel="alternate" href="/atom.xml" title="橙汁菌的小屋" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">橙汁菌的小屋</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <!-- 
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+         -->
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-《JavaScript高级程序设计》-引用类型" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/19/《JavaScript高级程序设计》-引用类型/" class="article-date">
+  <time datetime="2018-11-19T13:04:50.000Z" itemprop="datePublished">2018-11-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      《JavaScript高级程序设计》---引用类型
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>引用类型的值是引用类型的一个实例。对象是某个引用类型的实例。新对象是使用<strong>new操作符</strong>后跟一个<strong>构造函数</strong>来创建的。构造函数本身就是一个函数，只不过它的目的是出于创建一个新对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var person = new Object ( );</span><br></pre></td></tr></table></figure>
+<h2 id="使用构造函数Object为新对象定义了默认的属性和方法。"><a href="#使用构造函数Object为新对象定义了默认的属性和方法。" class="headerlink" title="使用构造函数Object为新对象定义了默认的属性和方法。"></a>使用构造函数Object为新对象定义了默认的属性和方法。</h2><h2 id="Object-类型"><a href="#Object-类型" class="headerlink" title="Object 类型"></a>Object 类型</h2><p>Object 是 JavaScript 中使用最多的一个类型，创建object实例的方式有两种：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 方法一： new + 构造函数</span><br><span class="line">var person = new Object ( );</span><br><span class="line">person.name = &quot;张三&quot;;</span><br><span class="line">person.age = 29;</span><br><span class="line">// 方法二： 对象字面量表示法</span><br><span class="line">var person= &#123;</span><br><span class="line">    name: &quot;张三&quot;,</span><br><span class="line">    age: 29</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="访问对象属性"><a href="#访问对象属性" class="headerlink" title="访问对象属性"></a>访问对象属性</h3><p>一般来说，访问对象属性都用点语法，但是在一些情况需要使用方括号法来访问对象的属性。<em>方括号法的有点是可以用过变量来访问属性</em>。</p>
+<h2 id="Array-类型"><a href="#Array-类型" class="headerlink" title="Array 类型"></a>Array 类型</h2><p>Array 类型是数据的有序列表，他的每一项都可以保存任意类型的数据，创建Array 也有两种：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 方法一： new + 构造函数</span><br><span class="line">var colors = new Array ( );</span><br><span class="line">// 方法二： 字面量表达式；</span><br><span class="line">var colors = [&apos;red&apos; , &apos;green&apos; , &apos;blue&apos;];</span><br></pre></td></tr></table></figure></p>
+<h3 id="检测数组"><a href="#检测数组" class="headerlink" title="检测数组"></a>检测数组</h3><ol>
+<li><code>value instanceof Array ==&gt;boolean</code></li>
+<li><code>Array.isArray( value ) ==&gt; boolean</code></li>
+<li><code>Object.prototype.toString.call( value ).slice(8,-1) ==&gt; &quot;Array&quot;</code></li>
+</ol>
+<h3 id="转换方法"><a href="#转换方法" class="headerlink" title="转换方法"></a>转换方法</h3><p>toString() , valueOf() 是将数组转换为以逗号分割的字符串，如果想使用其它的分割符可以使用<code>value.join(&#39;||&#39;)</code>;</p>
+<p>数组操作方法：</p>
+<ul>
+<li>push()  pop()  是对数组最后一个项的操作；</li>
+<li>shift() 取出数组的第一个，原数组数量减一；</li>
+<li>unshift() 想数组前推入任意长度的项，返回新长度的数组；</li>
+<li>reverse() 和 sort() 第一个是反转排序，第二个是按升序排列；</li>
+<li>concat()  拼接数组合为一个，不会改变原数组</li>
+<li>slice() 截取数组一部分返回，不会改变原数组</li>
+<li>splice() 它有多种用法，主要是用来向数组中部插入项。<ul>
+<li>删除：splice(0,2)  删除数组前两项</li>
+<li>插入 splice(2,0,”red”,”green”)； 从位置2开始插入字符串red greeb</li>
+<li>替换  splice(2,1,”red”,”green”)； 从位置2开始删除2量，再插入2项字符串red greeb</li>
+</ul>
+</li>
+<li>every() 对数组的每一项运行给定的函数，如果该函数对每一项都返回true则返回true</li>
+<li>filter() 对数组的每一项运行给定的函数，该函数会返回true的项组成的数组</li>
+<li>forEach() 对数组的每一项运行给定的函数，无返回值</li>
+<li>map() 对数组的每一项运行给定的函数，返回每次函数调用后的结果组成的数组</li>
+<li>some() 对数组的每一项运行给定的函数，如果该函数对任意一项返回true则返回true</li>
+</ul>
+<h2 id="Date-类型"><a href="#Date-类型" class="headerlink" title="Date 类型"></a>Date 类型</h2><p>关于时间实例关键就是在于时间的计算，时间格式的转换，以后会单独进行说明。</p>
+<blockquote>
+<p>这里推荐一个时间处理工具库 <a href="https://date-fns.org/" target="_blank" rel="noopener">date-fns</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/11/19/《JavaScript高级程序设计》-引用类型/" data-id="cjooboymf0004zdw7vxfwxyis" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/11/17/《JavaScript高级程序设计》-变量和作用域/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">《JavaScript高级程序设计》---变量和作用域</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/11/19/《JavaScript高级程序设计》-引用类型/">《JavaScript高级程序设计》---引用类型</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/17/《JavaScript高级程序设计》-变量和作用域/">《JavaScript高级程序设计》---变量和作用域</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/16/关于需求的理解和解决方案的选择漫谈/">关于需求的理解和解决方案的选择漫谈</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/15/程序员的腰/">秋，腰，自律</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/14/《JavaScript高级程序设计》-基本概念/">《JavaScript高级程序设计》---基本概念</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 橙汁菌<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
