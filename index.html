@@ -65,6 +65,64 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-前端持续集成开发环境" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/22/前端持续集成开发环境/" class="article-date">
+  <time datetime="2018-11-22T15:33:32.000Z" itemprop="datePublished">2018-11-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/22/前端持续集成开发环境/">前端持续集成开发环境</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在掘金上看见<a href="https://juejin.im/post/5a142d7b6fb9a0451170c2c7" target="_blank" rel="noopener">基于 Docker 打造前端持续集成开发环境</a>这篇文章，就像尝试一个基于docker的前端容器化部署方案。<br>我们公司现在也是基于jenkins+docker的代码容器化部署方案。</p>
+<hr>
+<p>目标：</p>
+<ol>
+<li><p>代码无需在本地构建</p>
+</li>
+<li><p>只需将代码推上 Github ，自动构建 -&gt; 部署</p>
+</li>
+<li><p>版本易管理，可轻松回退版本</p>
+</li>
+</ol>
+<hr>
+<h2 id="前置条件"><a href="#前置条件" class="headerlink" title="前置条件"></a>前置条件</h2><p>daocloud账号+github账号+个人服务器  基于daocloud的在线解决方案适用于个人开发者，生产开发的话介于安全性考虑需要进行本地化部署（本文不涉及）</p>
+<h2 id="本地项目添加dockerfile"><a href="#本地项目添加dockerfile" class="headerlink" title="本地项目添加dockerfile"></a>本地项目添加dockerfile</h2><p><code>FROM node:6.10.3-slim
+RUN apt-get update \    &amp;&amp; apt-get install -y nginx
+WORKDIR /app
+COPY . /app/
+EXPOSE 80
+RUN  npm install \     &amp;&amp; npm run build \     &amp;&amp; cp -r dist/* /var/www/html \     &amp;&amp; rm -rf /app
+CMD [&quot;nginx&quot;,&quot;-g&quot;,&quot;daemon off;&quot;]</code></p>
+<h2 id="推送项目到远端仓库"><a href="#推送项目到远端仓库" class="headerlink" title="推送项目到远端仓库"></a>推送项目到远端仓库</h2><p><img src="https://s1.ax1x.com/2018/11/22/FiiFte.png" alt="远端仓库"></p>
+<h2 id="使用-DaoCloud-创建流程"><a href="#使用-DaoCloud-创建流程" class="headerlink" title="使用 DaoCloud 创建流程"></a>使用 DaoCloud 创建流程</h2><p>此处直接看三环没有少的文章，很详细。这里不再复述。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/11/22/前端持续集成开发环境/" data-id="cjosrbhew000495w77xzxfuj4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-《JavaScript高级程序设计》-引用类型" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/11/19/《JavaScript高级程序设计》-引用类型/" class="article-date">
@@ -126,7 +184,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/19/《JavaScript高级程序设计》-引用类型/" data-id="cjooboymf0004zdw7vxfwxyis" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/19/《JavaScript高级程序设计》-引用类型/" data-id="cjosrbhev000395w720o1gt12" class="article-share-link">Share</a>
       
       
     </footer>
@@ -242,7 +300,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/17/《JavaScript高级程序设计》-变量和作用域/" data-id="cjooboymb0001zdw7iltwcl9k" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/17/《JavaScript高级程序设计》-变量和作用域/" data-id="cjosrbher000195w7kzabdxb2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -299,7 +357,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/16/关于需求的理解和解决方案的选择漫谈/" data-id="cjooboyme0003zdw7461nzwd9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/16/关于需求的理解和解决方案的选择漫谈/" data-id="cjosrbhex000595w7hcwqshiq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -350,7 +408,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/15/程序员的腰/" data-id="cjooboymg0005zdw7yukhhc4w" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/15/程序员的腰/" data-id="cjosrbhf9000795w7r4p4fvmh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -495,7 +553,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/14/《JavaScript高级程序设计》-基本概念/" data-id="cjooboymd0002zdw76de2apd9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/14/《JavaScript高级程序设计》-基本概念/" data-id="cjosrbhet000295w7jjvvi5ur" class="article-share-link">Share</a>
       
       
     </footer>
@@ -599,7 +657,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/13/Markdown的使用/" data-id="cjooboym80000zdw7m004wspb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/13/Markdown的使用/" data-id="cjosrbhen000095w7gdtvg3kp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -651,7 +709,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/12/你好-Hexo/" data-id="cjooboymr0006zdw7g3qwuco7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/12/你好-Hexo/" data-id="cjosrbhf8000695w7eb2895f6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -691,6 +749,10 @@
       <ul>
         
           <li>
+            <a href="/2018/11/22/前端持续集成开发环境/">前端持续集成开发环境</a>
+          </li>
+        
+          <li>
             <a href="/2018/11/19/《JavaScript高级程序设计》-引用类型/">《JavaScript高级程序设计》---引用类型</a>
           </li>
         
@@ -704,10 +766,6 @@
         
           <li>
             <a href="/2018/11/15/程序员的腰/">秋，腰，自律</a>
-          </li>
-        
-          <li>
-            <a href="/2018/11/14/《JavaScript高级程序设计》-基本概念/">《JavaScript高级程序设计》---基本概念</a>
           </li>
         
       </ul>
