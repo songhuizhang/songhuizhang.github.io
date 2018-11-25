@@ -8,12 +8,12 @@
   
   
   
-  <title>前端持续集成开发环境 | 橙汁菌的小屋</title>
+  <title>《JavaScript高级程序设计》---面向对象的程序设计 | 橙汁菌的小屋</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="开发流程,docker,自动化部署,">
+    <meta name="keywords" content="JavaScript,JavaScript高级程序设计,面向对象,">
   
 
   
@@ -146,56 +146,69 @@
 <div>
   <div class="post">
     <h1 class="article-title">
-      <span>前端持续集成开发环境</span>
+      <span>《JavaScript高级程序设计》---面向对象的程序设计</span>
     </h1>
     <div class="article-top-meta">
       <span>
         发布 : 
-        2018-11-22
+        2018-11-25
       </span>
       <span>
         分类 : 
           
-            <a href="/categories/开发流程/">
-              开发流程
+            <a href="/categories/JavaScript/">
+              JavaScript
             </a>
           
       </span>
       <span>
-        浏览 : <span class="article-timer" data-identity="前端持续集成开发环境"></span>
+        浏览 : <span class="article-timer" data-identity="《JavaScript高级程序设计》-面向对象的程序设计"></span>
       </span>
     </div>
     <div class="article-content">
       <div class="markdown-body">
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在掘金上看见<a href="https://juejin.im/post/5a142d7b6fb9a0451170c2c7" target="_blank" rel="noopener">基于 Docker 打造前端持续集成开发环境</a>这篇文章，就像尝试一个基于docker的前端容器化部署方案。<br>我们公司现在也是基于jenkins+docker的代码容器化部署方案。</p>
+        <p>面向对象语言都有一个标志，那就是类。在JavaScript中没有类的概念，因此它实现面向对象的和传统的面向对象语言有所不同。</p>
+<h2 id="理解对象属性"><a href="#理解对象属性" class="headerlink" title="理解对象属性"></a>理解对象属性</h2><h3 id="创建自定义对象"><a href="#创建自定义对象" class="headerlink" title="创建自定义对象"></a>创建自定义对象</h3><p>方法一：通过Object创建一个实例，再为它添加属性和方法；<br><code></code><br>var person = new Object();<br>person.name = “winnie”;<br>person.age = 26;<br>person.job = “Font Enginner”;</p>
+<p>person.sayName = function(){<br>    alert(this.name);<br>}<br><code></code></p>
+<p>方法二：通过字面的方法创建对象</p>
+<p><code>var person = {
+    name: &quot;winnie&quot;,
+    age: 26,
+    job: &quot;Font Enginner&quot;,
+    sayName: function(){
+        alert(this.name);
+    }
+}</code></p>
+<h3 id="属性类型"><a href="#属性类型" class="headerlink" title="属性类型"></a>属性类型</h3><p>ECMAScript中有两种属性：数据属性和访问器属性</p>
+<h4 id="数据属性"><a href="#数据属性" class="headerlink" title="数据属性"></a>数据属性</h4><p>包含一个数据值的位置，这个位置可以读取写入，它有4个描述行为的特征</p>
+<ul>
+<li>[[Configurable]]:表示是否具有可以删除和可修改的特性，默认值：true</li>
+<li>[[Enumerable]]:表示是否具有可以通过for-in返回的属性，默认值：true</li>
+<li>[[writable]]:表示包含可以修改的属性的值，默认值：true</li>
+<li>[[value]]:表示包含这个属性的数据值，默认值：undefined</li>
+</ul>
+<p>修改默认属性特性，需要通过<code>Object.defineProperty()</code>方法，但是当[[Configurable]]为false后，就不能在修改属性特征了；</p>
+<p><code></code><br>var person = {};<br>Object.defineProperty(person,”name”,{<br>    wirtable: false,<br>    value: “Winnie”<br>})</p>
+<p>person.name  // Winnie<br>person.name = “章三”; // 不可修改<br>person.name  // Winnie<br><code></code></p>
+<h4 id="访问器属性"><a href="#访问器属性" class="headerlink" title="访问器属性"></a>访问器属性</h4><p>不包含数据值，只包含了一对getter和setter函数，再读取访问器属性时调用了getter，写入时调用了setter，访问器属性有如下四个特征</p>
+<ul>
+<li>[[Configurable]]:表示是否具有可以删除和可修改的特性，默认值：true</li>
+<li>[[Enumerable]]:表示是否具有可以通过for-in返回的属性，默认值：true</li>
+<li>[[Get]]:读取属性时调用的函数，默认值：undefined</li>
+<li>[[Set]]:写入属性时调用的函数，默认值：undefined</li>
+</ul>
+<p><em>访问器属性不能直接定义，需要通过Object.defineProperty()来定义</em></p>
+<p><code></code><br>var book = {<br>    _year: 2004,<br>    edition: 1<br>};</p>
+<p>Object.defineProperty(book,”year”,{<br>    get: function(){<br>        return this._year;<br>    },<br>    set: function(newValue){<br>        if (newValue &gt; 2004) {<br>            this._year = newValue;<br>            this.edition += newValue - 2004;<br>        }<br>    }<br>})<br><code></code></p>
 <hr>
-<p>目标：</p>
-<ol>
-<li><p>代码无需在本地构建</p>
-</li>
-<li><p>只需将代码推上 Github ，自动构建 -&gt; 部署</p>
-</li>
-<li><p>版本易管理，可轻松回退版本</p>
-</li>
-</ol>
-<hr>
-<h2 id="前置条件"><a href="#前置条件" class="headerlink" title="前置条件"></a>前置条件</h2><p>daocloud账号+github账号+个人服务器  基于daocloud的在线解决方案适用于个人开发者，生产开发的话介于安全性考虑需要进行本地化部署（本文不涉及）</p>
-<h2 id="本地项目添加dockerfile"><a href="#本地项目添加dockerfile" class="headerlink" title="本地项目添加dockerfile"></a>本地项目添加dockerfile</h2><p><code>FROM node:6.10.3-slim
-RUN apt-get update \    &amp;&amp; apt-get install -y nginx
-WORKDIR /app
-COPY . /app/
-EXPOSE 80
-RUN  npm install \     &amp;&amp; npm run build \     &amp;&amp; cp -r dist/* /var/www/html \     &amp;&amp; rm -rf /app
-CMD [&quot;nginx&quot;,&quot;-g&quot;,&quot;daemon off;&quot;]</code></p>
-<h2 id="推送项目到远端仓库"><a href="#推送项目到远端仓库" class="headerlink" title="推送项目到远端仓库"></a>推送项目到远端仓库</h2><p><img src="https://s1.ax1x.com/2018/11/22/FiiFte.png" alt="远端仓库"></p>
-<h2 id="使用-DaoCloud-创建流程"><a href="#使用-DaoCloud-创建流程" class="headerlink" title="使用 DaoCloud 创建流程"></a>使用 DaoCloud 创建流程</h2><p>此处直接看三环没有少的文章，很详细。这里不再复述。</p>
+<p>(未完待续。。。)</p>
       </div>
     </div>
     <div class="copy-right">
       <div class="markdown-body">
         <blockquote>
         <p>本文作者：橙汁菌<br>
-        本文链接： <a href="">http://yoursite.com/2018/11/22/前端持续集成开发环境/</a><br>
+        本文链接： <a href="">http://yoursite.com/2018/11/25/《JavaScript高级程序设计》-面向对象的程序设计/</a><br>
         版权声明： 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</p>
         </blockquote>
       </div>
@@ -207,14 +220,14 @@ CMD [&quot;nginx&quot;,&quot;-g&quot;,&quot;daemon off;&quot;]</code></p>
           
             
             <span class="span--tag">
-              <a href="/tags/docker/">
-                #docker
+              <a href="/tags/JavaScript高级程序设计/">
+                #JavaScript高级程序设计
               </a>
             </span>
             
             <span class="span--tag">
-              <a href="/tags/自动化部署/">
-                #自动化部署
+              <a href="/tags/面向对象/">
+                #面向对象
               </a>
             </span>
             
@@ -236,15 +249,9 @@ setTimeout(generateToc, 1000);
       <div class="nav-pre">
         <i class="iconfont icon-prev"></i>
         上一篇:
-        <a href="/2018/11/19/《JavaScript高级程序设计》-引用类型/" target="_self">《JavaScript高级程序设计》---引用类型</a>
+        <a href="/2018/11/22/前端持续集成开发环境/" target="_self">前端持续集成开发环境</a>
       </div>
     
-    
-      <div class="nav-next">
-        下一篇:
-        <a href="/2018/11/25/《JavaScript高级程序设计》-面向对象的程序设计/" target="_self">《JavaScript高级程序设计》---面向对象的程序设计</a>
-        <i class="iconfont icon-next"></i>
-      </div>
     
   </nav>
 
