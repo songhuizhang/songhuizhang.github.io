@@ -168,17 +168,9 @@
     <div class="article-content">
       <div class="markdown-body">
         <p>面向对象语言都有一个标志，那就是类。在JavaScript中没有类的概念，因此它实现面向对象的和传统的面向对象语言有所不同。</p>
-<h2 id="理解对象属性"><a href="#理解对象属性" class="headerlink" title="理解对象属性"></a>理解对象属性</h2><h3 id="创建自定义对象"><a href="#创建自定义对象" class="headerlink" title="创建自定义对象"></a>创建自定义对象</h3><p>方法一：通过Object创建一个实例，再为它添加属性和方法；<br><code></code><br>var person = new Object();<br>person.name = “winnie”;<br>person.age = 26;<br>person.job = “Font Enginner”;</p>
-<p>person.sayName = function(){<br>    alert(this.name);<br>}<br><code></code></p>
+<h2 id="理解对象属性"><a href="#理解对象属性" class="headerlink" title="理解对象属性"></a>理解对象属性</h2><h3 id="创建自定义对象"><a href="#创建自定义对象" class="headerlink" title="创建自定义对象"></a>创建自定义对象</h3><p>方法一：通过Object创建一个实例，再为它添加属性和方法；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var person = new Object();</span><br><span class="line">person.name = &quot;winnie&quot;;</span><br><span class="line">person.age = 26;</span><br><span class="line">person.job = &quot;Font Enginner&quot;;</span><br><span class="line"></span><br><span class="line">person.sayName = function()&#123;</span><br><span class="line">    alert(this.name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>方法二：通过字面的方法创建对象</p>
-<p><code>var person = {
-    name: &quot;winnie&quot;,
-    age: 26,
-    job: &quot;Font Enginner&quot;,
-    sayName: function(){
-        alert(this.name);
-    }
-}</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var person = &#123;</span><br><span class="line">    name: &quot;winnie&quot;,</span><br><span class="line">    age: 26,</span><br><span class="line">    job: &quot;Font Enginner&quot;,</span><br><span class="line">    sayName: function()&#123;</span><br><span class="line">        alert(this.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="属性类型"><a href="#属性类型" class="headerlink" title="属性类型"></a>属性类型</h3><p>ECMAScript中有两种属性：数据属性和访问器属性</p>
 <h4 id="数据属性"><a href="#数据属性" class="headerlink" title="数据属性"></a>数据属性</h4><p>包含一个数据值的位置，这个位置可以读取写入，它有4个描述行为的特征</p>
 <ul>
@@ -188,8 +180,7 @@
 <li>[[value]]:表示包含这个属性的数据值，默认值：undefined</li>
 </ul>
 <p>修改默认属性特性，需要通过<code>Object.defineProperty()</code>方法，但是当[[Configurable]]为false后，就不能在修改属性特征了；</p>
-<p><code></code><br>var person = {};<br>Object.defineProperty(person,”name”,{<br>    wirtable: false,<br>    value: “Winnie”<br>})</p>
-<p>person.name  // Winnie<br>person.name = “章三”; // 不可修改<br>person.name  // Winnie<br><code></code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var person = &#123;&#125;;</span><br><span class="line">Object.defineProperty(person,&quot;name&quot;,&#123;</span><br><span class="line">    wirtable: false,</span><br><span class="line">    value: &quot;Winnie&quot;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">person.name  // Winnie</span><br><span class="line">person.name = &quot;章三&quot;; // 不可修改</span><br><span class="line">person.name  // Winnie</span><br></pre></td></tr></table></figure>
 <h4 id="访问器属性"><a href="#访问器属性" class="headerlink" title="访问器属性"></a>访问器属性</h4><p>不包含数据值，只包含了一对getter和setter函数，再读取访问器属性时调用了getter，写入时调用了setter，访问器属性有如下四个特征</p>
 <ul>
 <li>[[Configurable]]:表示是否具有可以删除和可修改的特性，默认值：true</li>
@@ -198,8 +189,7 @@
 <li>[[Set]]:写入属性时调用的函数，默认值：undefined</li>
 </ul>
 <p><em>访问器属性不能直接定义，需要通过Object.defineProperty()来定义</em></p>
-<p><code></code><br>var book = {<br>    _year: 2004,<br>    edition: 1<br>};</p>
-<p>Object.defineProperty(book,”year”,{<br>    get: function(){<br>        return this._year;<br>    },<br>    set: function(newValue){<br>        if (newValue &gt; 2004) {<br>            this._year = newValue;<br>            this.edition += newValue - 2004;<br>        }<br>    }<br>})<br><code></code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var book = &#123;</span><br><span class="line">    _year: 2004,</span><br><span class="line">    edition: 1</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Object.defineProperty(book,&quot;year&quot;,&#123;</span><br><span class="line">    get: function()&#123;</span><br><span class="line">        return this._year;</span><br><span class="line">    &#125;,</span><br><span class="line">    set: function(newValue)&#123;</span><br><span class="line">        if (newValue &gt; 2004) &#123;</span><br><span class="line">            this._year = newValue;</span><br><span class="line">            this.edition += newValue - 2004;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <hr>
 <p>(未完待续。。。)</p>
       </div>

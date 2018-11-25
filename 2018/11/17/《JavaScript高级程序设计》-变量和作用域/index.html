@@ -225,11 +225,11 @@
 <p>正常来说可以把函数的参数想像成局部变量</p>
 </blockquote>
 <h2 id="检验变量类型"><a href="#检验变量类型" class="headerlink" title="检验变量类型"></a>检验变量类型</h2><p>使用typeof操作符可以检验变量是字符串、数值、布尔值、还是undefined的最佳工具；</p>
-<p><code>typeof 变量 ==》 字符串：string、boolean、number、undefined、object</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typeof 变量 ==》 字符串：string、boolean、number、undefined、object</span><br></pre></td></tr></table></figure>
 <p>使用instanceof操作符可以用来检验引用类型的对象是具体的什么对象。</p>
-<p><code>variable instanceof constructor  ==》 布尔值： true、false；</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">variable instanceof constructor  ==》 布尔值： true、false；</span><br></pre></td></tr></table></figure>
 <p>最优检验法：</p>
-<p><code>Object.prototype.toString.call(变量).slice(8, -1);  ==》 字符串：object、string、arrat、number、boolean、nudefined</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object.prototype.toString.call(变量).slice(8, -1);  ==》 字符串：object、string、arrat、number、boolean、nudefined</span><br></pre></td></tr></table></figure>
 <h2 id="执行环境"><a href="#执行环境" class="headerlink" title="执行环境"></a>执行环境</h2><p>执行环境定义了变量或函数有权访问其它的数据，决定了他们各自的行为；</p>
 <p>这里有几种穿件的执行环境：</p>
 <ul>

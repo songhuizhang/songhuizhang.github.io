@@ -180,13 +180,7 @@
 </ol>
 <hr>
 <h2 id="前置条件"><a href="#前置条件" class="headerlink" title="前置条件"></a>前置条件</h2><p>daocloud账号+github账号+个人服务器  基于daocloud的在线解决方案适用于个人开发者，生产开发的话介于安全性考虑需要进行本地化部署（本文不涉及）</p>
-<h2 id="本地项目添加dockerfile"><a href="#本地项目添加dockerfile" class="headerlink" title="本地项目添加dockerfile"></a>本地项目添加dockerfile</h2><p><code>FROM node:6.10.3-slim
-RUN apt-get update \    &amp;&amp; apt-get install -y nginx
-WORKDIR /app
-COPY . /app/
-EXPOSE 80
-RUN  npm install \     &amp;&amp; npm run build \     &amp;&amp; cp -r dist/* /var/www/html \     &amp;&amp; rm -rf /app
-CMD [&quot;nginx&quot;,&quot;-g&quot;,&quot;daemon off;&quot;]</code></p>
+<h2 id="本地项目添加dockerfile"><a href="#本地项目添加dockerfile" class="headerlink" title="本地项目添加dockerfile"></a>本地项目添加dockerfile</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">FROM node:6.10.3-slim</span><br><span class="line">RUN apt-get update \    &amp;&amp; apt-get install -y nginx</span><br><span class="line">WORKDIR /app</span><br><span class="line">COPY . /app/</span><br><span class="line">EXPOSE 80</span><br><span class="line">RUN  npm install \     &amp;&amp; npm run build \     &amp;&amp; cp -r dist/* /var/www/html \     &amp;&amp; rm -rf /app</span><br><span class="line">CMD [&quot;nginx&quot;,&quot;-g&quot;,&quot;daemon off;&quot;]</span><br></pre></td></tr></table></figure>
 <h2 id="推送项目到远端仓库"><a href="#推送项目到远端仓库" class="headerlink" title="推送项目到远端仓库"></a>推送项目到远端仓库</h2><p><img src="https://s1.ax1x.com/2018/11/22/FiiFte.png" alt="远端仓库"></p>
 <h2 id="使用-DaoCloud-创建流程"><a href="#使用-DaoCloud-创建流程" class="headerlink" title="使用 DaoCloud 创建流程"></a>使用 DaoCloud 创建流程</h2><p>此处直接看三环没有少的文章，很详细。这里不再复述。</p>
       </div>
