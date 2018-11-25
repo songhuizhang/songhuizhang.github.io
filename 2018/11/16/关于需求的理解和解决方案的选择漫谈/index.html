@@ -1,92 +1,174 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
+
+  
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
+  <meta name="author" content="董沅鑫, yuanxin.me@gmail.com">
+  
+  
   
   <title>关于需求的理解和解决方案的选择漫谈 | 橙汁菌的小屋</title>
+
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="需求的理解在日常的开发中，我习惯的是先对需求进行分析，对于需求的实现程度和截止时间有一个认识，而不是拿到需求草草看一下就直接上手开发。 对于需求分析，我有一下几点经验：  需求合理性和实现性的大致评估 单个需求在于整个项目中是否有其它关联 需求前后是否进行闭环验证 开发时间是否合理  需求合理性和实现性此需求对应的功能上线时间，是否定稿，后期变动范围。 在一般的公司中，该需求是十分普遍的事情，对于">
-<meta property="og:type" content="article">
-<meta property="og:title" content="关于需求的理解和解决方案的选择漫谈">
-<meta property="og:url" content="http://yoursite.com/2018/11/16/关于需求的理解和解决方案的选择漫谈/index.html">
-<meta property="og:site_name" content="橙汁菌的小屋">
-<meta property="og:description" content="需求的理解在日常的开发中，我习惯的是先对需求进行分析，对于需求的实现程度和截止时间有一个认识，而不是拿到需求草草看一下就直接上手开发。 对于需求分析，我有一下几点经验：  需求合理性和实现性的大致评估 单个需求在于整个项目中是否有其它关联 需求前后是否进行闭环验证 开发时间是否合理  需求合理性和实现性此需求对应的功能上线时间，是否定稿，后期变动范围。 在一般的公司中，该需求是十分普遍的事情，对于">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-16T14:14:33.672Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于需求的理解和解决方案的选择漫谈">
-<meta name="twitter:description" content="需求的理解在日常的开发中，我习惯的是先对需求进行分析，对于需求的实现程度和截止时间有一个认识，而不是拿到需求草草看一下就直接上手开发。 对于需求分析，我有一下几点经验：  需求合理性和实现性的大致评估 单个需求在于整个项目中是否有其它关联 需求前后是否进行闭环验证 开发时间是否合理  需求合理性和实现性此需求对应的功能上线时间，是否定稿，后期变动范围。 在一般的公司中，该需求是十分普遍的事情，对于">
+
+  
+    <meta name="keywords" content="其他,需求,">
+  
+
+  
+    <meta name="description" content="什么都有的树洞。">
+  
+
   
     <link rel="alternate" href="/atom.xml" title="橙汁菌的小屋" type="application/atom+xml">
   
+
   
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="/images/bitbug_favicon.ico">
+    <link rel="apple-touch-icon" href="/images/Milk-beverage-water.png">
   
+
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+
+  <link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/icon/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+  <script src="/js/util.js"></script>
+<script src="/js/valine.min.js"></script>
   
-  <link rel="stylesheet" href="/css/style.css">
-  
+  <script src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js" async></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.0/dist/av-min.js"></script>
 
 </head>
-</html>
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">橙汁菌的小屋</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        <!-- 
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-         -->
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+
+  <body>
+
+    
+
+    <div id="app">
+
+      <div class="header-wrap">
+  <header>
+    <div class="site-brand">
+      <div class="site-title">
+        <a href="/">橙汁菌</a>
       </div>
     </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-关于需求的理解和解决方案的选择漫谈" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/11/16/关于需求的理解和解决方案的选择漫谈/" class="article-date">
-  <time datetime="2018-11-16T14:14:21.000Z" itemprop="datePublished">2018-11-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      关于需求的理解和解决方案的选择漫谈
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
+    <nav class="site-navigation">
+      <ul class="nav-menu">
       
-        <h2 id="需求的理解"><a href="#需求的理解" class="headerlink" title="需求的理解"></a>需求的理解</h2><p>在日常的开发中，我习惯的是先对需求进行分析，对于需求的实现程度和截止时间有一个认识，而不是拿到需求草草看一下就直接上手开发。</p>
+        <li class="nav-item" data-path="/">
+          
+            <a href="/">主页</a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          
+            <a href="/archives/">归档</a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          
+            <a href="/categories/">分类</a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          
+            <a href="/tags/">标签</a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          
+            <a href="/about/">关于</a>
+          
+        </li>
+      
+      </ul>
+    </nav>
+    <i class="iconfont icon-menu"></i>
+  </header>
+</div>
+
+<script>
+  let links = document.querySelectorAll('.nav-item');
+  for(let link of links){
+    let childrenLink = link.querySelector('ul');
+    link.addEventListener('mouseenter', () => {
+      if(childrenLink) {
+        childrenLink.className = "nav-menu--dropdown active";
+      }
+    })
+    link.addEventListener('mouseleave', () => {
+      if(childrenLink) {
+        childrenLink.className = "nav-menu--dropdown";
+      }
+    })
+  }
+  let rootRealPath = getRealPath(window.location.pathname, true);
+  for(let link of links) {
+    let linkPath = link.getAttribute("data-path");
+    if(linkPath && getRealPath(linkPath, true) === rootRealPath) {
+      link.className = "nav-item hover";
+    }
+  }
+
+  let iconMenu = document.querySelector("i.iconfont.icon-menu"),
+    iconMenuClicked = false;
+  let navDOM = document.querySelector("nav.site-navigation");
+  iconMenu.addEventListener("click", () => {
+    iconMenuClicked 
+      ? navDOM.className = "site-navigation active"
+      : navDOM.className = "site-navigation";
+    iconMenuClicked = !iconMenuClicked;
+  })
+</script>
+
+      
+
+
+
+
+
+
+
+
+<div class="container">
+
+  
+<div>
+  <div class="post">
+    <h1 class="article-title">
+      <span>关于需求的理解和解决方案的选择漫谈</span>
+    </h1>
+    <div class="article-top-meta">
+      <span>
+        发布 : 
+        2018-11-16
+      </span>
+      <span>
+        分类 : 
+          
+            <a href="/categories/其他/">
+              其他
+            </a>
+          
+      </span>
+      <span>
+        浏览 : <span class="article-timer" data-identity="关于需求的理解和解决方案的选择漫谈"></span>
+      </span>
+    </div>
+    <div class="article-content">
+      <div class="markdown-body">
+        <p></p>
+<h2 id="需求的理解"><a href="#需求的理解" class="headerlink" title="需求的理解"></a>需求的理解</h2><p>在日常的开发中，我习惯的是先对需求进行分析，对于需求的实现程度和截止时间有一个认识，而不是拿到需求草草看一下就直接上手开发。</p>
 <p>对于需求分析，我有一下几点经验：</p>
 <ol>
 <li>需求合理性和实现性的大致评估</li>
@@ -107,123 +189,349 @@
 <p>分析需求的最低要求，已经最快实现方案。大多数人可能会说：”<em>不一次做好的东西后期改动起来会更痛苦的。</em>“没错，但是我就是不想加班怎么办呢？一般来说开发时间的不合理是由很多因素造成的，所以这类需求本来就充满了不确定性。大概率的情况下，改动是必然的。所以你懂的，解放自己的个人时间。</p>
 <hr>
 <p>以上是我的个人经验，欢迎探讨交流，拒接直接喷！！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/16/关于需求的理解和解决方案的选择漫谈/" data-id="cjosrbhex000595w7hcwqshiq" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2018/11/17/《JavaScript高级程序设计》-变量和作用域/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          《JavaScript高级程序设计》---变量和作用域
-        
       </div>
-    </a>
-  
-  
-    <a href="/2018/11/15/程序员的腰/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">秋，腰，自律</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li></ul>
     </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2018/11/22/前端持续集成开发环境/">前端持续集成开发环境</a>
-          </li>
-        
-          <li>
-            <a href="/2018/11/19/《JavaScript高级程序设计》-引用类型/">《JavaScript高级程序设计》---引用类型</a>
-          </li>
-        
-          <li>
-            <a href="/2018/11/17/《JavaScript高级程序设计》-变量和作用域/">《JavaScript高级程序设计》---变量和作用域</a>
-          </li>
-        
-          <li>
-            <a href="/2018/11/16/关于需求的理解和解决方案的选择漫谈/">关于需求的理解和解决方案的选择漫谈</a>
-          </li>
-        
-          <li>
-            <a href="/2018/11/15/程序员的腰/">秋，腰，自律</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
+    <div class="copy-right">
+      <div class="markdown-body">
+        <blockquote>
+        <p>本文作者：董沅鑫<br>
+        本文链接： <a href="">http://yoursite.com/2018/11/16/关于需求的理解和解决方案的选择漫谈/</a><br>
+        版权声明： 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</p>
+        </blockquote>
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2018 橙汁菌<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+    <div class="article-footer">
+      <div class="article-meta pull-left">
+        <span>
+          <i class="iconfont icon-06tags"></i>标签: 
+          
+            
+            <span class="span--tag">
+              <a href="/tags/需求/">
+                #需求
+              </a>
+            </span>
+            
+          
+        </span>
+      </div>
+      <div class="article-meta pull-right">
+      </div>
     </div>
   </div>
+</div>
+
+<script>
+setTimeout(generateToc, 1000);
+</script>
+
+  <nav class="post-navigation">
+    
+      <div class="nav-pre">
+        <i class="iconfont icon-prev"></i>
+        上一篇:
+        <a href="/2018/11/15/程序员的腰/" target="_self">秋，腰，自律</a>
+      </div>
+    
+    
+      <div class="nav-next">
+        下一篇:
+        <a href="/2018/11/17/《JavaScript高级程序设计》-变量和作用域/" target="_self">《JavaScript高级程序设计》---变量和作用域</a>
+        <i class="iconfont icon-next"></i>
+      </div>
+    
+  </nav>
+
+  <a href="#comment" class="comment-anchor"></a>
+  <div class="comment-title"><i class="iconfont icon-footprint"></i> 留下足迹 <i class="iconfont icon-footprint"></i></div>
+  <div id="vcomments"></div>
+
+  <script defer>
+  if( true ) {
+    let path = getRealPath()
+    new Valine({
+      el: "#vcomments",
+      appId: "plLkYqtTUBUhTHQdPgLazsI6-gzGzoHsz",
+      appKey: "0m3Em9TAssXfEC3PPtu7Md51",
+      notify: false,
+      verify: false,
+      avatar: "robohash",
+      placeholder: "正确填写邮箱, 才能及时收到回复哦♪(^∇^*)",
+      path
+    });
+  }
+</script>
+
+  <script defer>
+const valineAPI = (() => {
+  try {
+    AV.init("plLkYqtTUBUhTHQdPgLazsI6-gzGzoHsz", "0m3Em9TAssXfEC3PPtu7Md51");
+  } catch(error) {}
+  const isExist = (identity) => {
+    identity = identity || getRealPath();
+    let query = new AV.Query('Timer');
+    return new Promise((resolve, reject) => {
+      query.equalTo("identity", identity);
+      query.find().then(results => {
+        resolve(results.length > 0);
+      }, error => reject(error));
+    })
+  }
+
+  const _get = (identity) => {
+    let query = null;
+    if(identity && identity instanceof Array){
+      let querys = [];
+      for(let i = 0; i < identity.length; ++i) {
+        querys[i] = new AV.Query('Timer');
+        querys[i].equalTo('identity', identity[i]);
+      }
+      query = AV.Query.or.apply(null ,querys);
+    } else {
+      identity = identity || getRealPath();
+      query = new AV.Query("Timer");
+      query.equalTo("identity", identity);
+    }
+
+    return new Promise((resolve, reject) => {
+      query.find()
+      .then(results => resolve(results))
+      .catch(error => reject(error))
+    })
+  }
+
+  const create = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let Todo = AV.Object.extend('Timer');
+      let todo = new Todo();
+      todo.set("times", 1);
+      todo.set("identity", identity);
+      todo.save().then(res => resolve(true), error => reject(error));
+    })
+  }
+
+  const update = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let query = new AV.Query('Timer');
+      query.equalTo("identity", identity);
+      query.find().then(todos => {
+        todos.forEach(todo => {
+          todo.set("times", todo.attributes.times + 1);
+        });
+        return AV.Object.saveAll(todos);
+      }).then(todos => resolve(true), error => reject(error));
+    })
+  }
+
+  return {
+    isExist,
+    _get,
+    update,
+    create
+  }
+})()
+
+const calcAndWriteTimes = () => {
+  let isPost = true;
+
+  let timerAllDOM = document.querySelectorAll(".article-timer");
+
+  if(isPost) {
+    let identity = timerAllDOM[0].getAttribute("data-identity");
+    valineAPI.isExist(identity)
+    .then(exist => {
+      if(exist) {
+        return valineAPI.update(identity);
+      }
+      return new Promise(resolve => resolve(true));
+    })
+    .then( succuess => valineAPI._get(identity))
+    .then( result => timerAllDOM[0].innerText = result[0].attributes.times)
+    .catch(error => console.log(error.message))
+    return ;
+  }
+
+  let timerDOMCache = {};
+
+  for(let timerDOM of timerAllDOM) {
+    let identity = timerDOM.getAttribute("data-identity");
+    timerDOMCache[identity] = {
+      dom: timerDOM,
+      times: undefined
+    };
+  }
+
+  let identities = Object.keys(timerDOMCache);
+  valineAPI._get(identities).then(results => {
+    for(let result of results) {
+      let {identity, times} = result.attributes;
+      timerDOMCache[identity].times = times;
+      timerDOMCache[identity].dom.innerText = times;
+    }
+    for(let identity of identities) {
+      if(timerDOMCache[identity].times){
+        continue;
+      }
+      timerDOMCache[identity].dom.innerText = 1;
+      valineAPI.create(identity);
+    }
+  }).catch(error => console.log(error.message))
+}
+
+if(true){
+  calcAndWriteTimes();
+}
+</script>
+
+</div>
+
+
+      <script>
+  let isMathjaxConfig = false; // 防止重复调用Config，造成性能损耗
+
+  const initMathjaxConfig = () => {
+    if (!window.MathJax) {
+      return;
+    }
+    window.MathJax.Hub.Config({
+      showProcessingMessages: false, //关闭js加载过程信息
+      messageStyle: "none", //不显示信息
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]], //行内公式选择符
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]], //段内公式选择符
+        skipTags: ["script", "noscript", "style", "textarea", "pre", "code", "a"] //避开某些标签
+      },
+      "HTML-CSS": {
+        availableFonts: ["STIX", "TeX"], //可选字体
+        showMathMenu: false //关闭右击菜单显示
+      }
+    });
+    isMathjaxConfig = true; // 
+  };
+  if (isMathjaxConfig === false) { // 如果：没有配置MathJax
+    initMathjaxConfig();
+  }
+  window.MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById('app')]);
+  
+</script>
+<footer>
+  <p class="site-info">
+    © 2018 <a href="https://github.com/songhuizhang">橙汁菌</a>  已运行<span id="time-to-now"></span><span class="my-face">(●'◡'●)ﾉ♥</span>
+    <br>
+    Powered by <a href="https://hexo.io">Hexo</a> | Theme - <a href="https://github.com/dongyuanxin/theme-bmw">BMW</a>
+    <br>
+  </p>
 </footer>
+
+<script>
+const timeToNowDOM = document.querySelector("#time-to-now");
+const startTimestamp = new Date(2018, 11, 12, 22, 55).getTime();
+
+const updateTimeStr = () => {
+  let offset = parseInt(
+      (new Date().getTime() - startTimestamp) / 1000,
+      10
+    ),
+    day = Math.floor(offset / 86400),
+    hour = Math.floor((offset % 86400) / 3600),
+    minute = Math.floor(((offset % 86400) % 3600) / 60),
+    second = Math.floor(((offset % 86400) % 3600) % 60);
+  timeToNowDOM.innerHTML =
+    day + "天" + hour + "小时" + minute + "分钟" + second + "秒";
+  setTimeout(updateTimeStr, 500);
+}
+
+setTimeout(updateTimeStr, 500);
+</script>
+
+      <div class="back-to-top hidden">
+  <span>
+    <i class="iconfont icon-60"></i><span></span>%
+  </span>
+</div>
+
+<script>
+const updateIconToTop = percent => {
+  let dom = document.querySelector(".back-to-top span span");
+  dom.innerText = percent;
+  if(percent < 1) {
+    document.querySelector(".back-to-top").className = "back-to-top hidden";
+  } else {
+    document.querySelector(".back-to-top").className = "back-to-top";
+  }
+}
+
+const handleScoll = () => {
+  let isRunning = false;
+  return () => {
+    if (isRunning) return;
+    isRunning = true;
+    window.requestAnimationFrame(timestamp => {
+      let scrollTop =
+          document.documentElement.scrollTop || document.body.scrollTop,
+        scrollHeight =
+          document.documentElement.scrollHeight ||
+          document.body.scrollHeight,
+        clientHeight =
+          document.documentElement.clientHeight ||
+          document.body.clientHeight;
+      isRunning = false;
+      if (scrollTop <= 1) {
+        updateIconToTop(0);
+        return;
+      }
+      if (scrollTop + clientHeight >= scrollHeight) {
+        updateIconToTop(100);
+      } else {
+        updateIconToTop(parseInt(
+          100 * scrollTop / (scrollHeight - clientHeight),
+          10
+        ));
+      }
+    });
+  };
+}
+
+const backToTop = () => {
+  let scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop,
+    delay = 10,
+    time = 200;
+  if (scrollTop <= 20) {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    return;
+  }
+  let step = Math.ceil(scrollTop * delay / time);
+  let timer = setInterval(() => {
+    scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop;
+    if (scrollTop - step <= 0) {
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      clearInterval(timer);
+    } else {
+      document.documentElement.scrollTop = scrollTop - step;
+      document.body.scrollTop = scrollTop - step;
+    }
+  }, delay);
+}
+
+document.addEventListener("scroll", handleScoll(), false);
+
+document.querySelector(".back-to-top").addEventListener("click", backToTop, false);
+
+</script>
+
+      <aside id="sidebar">
+        <p id="sidebar-header"></p>
+        <ol id="sidebar-toc"></ol>
+      </aside>
+
     </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
+  </body>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-
-  </div>
-</body>
 </html>
