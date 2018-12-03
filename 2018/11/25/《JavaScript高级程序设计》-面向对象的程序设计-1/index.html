@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="橙汁菌, songhui25262@gmail.com">
+  
+  
+  
+  <title>《JavaScript高级程序设计》---面向对象的程序设计(1) | 橙汁菌的小屋</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="JavaScript,JavaScript高级程序设计,面向对象,">
+  
+
+  
+    <meta name="description" content="什么都有的树洞。">
+  
+
+  
+    <link rel="alternate" href="/atom.xml" title="橙汁菌的小屋" type="application/atom+xml">
+  
+
+  
+    <link rel="icon" href="/images/bitbug_favicon.ico">
+    <link rel="apple-touch-icon" href="/images/Milk-beverage-water.png">
+  
+
+  
+
+  <link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/icon/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+  <script src="/js/util.js"></script>
+<script src="/js/valine.min.js"></script>
+  
+  <script src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js" async></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.0/dist/av-min.js"></script>
+
+</head>
+
+  <body>
+
+    
+
+    <div id="app">
+
+      <div class="header-wrap">
+  <header>
+    <div class="site-brand">
+      <div class="site-title">
+        <a href="/">橙汁菌</a>
+      </div>
+    </div>
+    <nav class="site-navigation">
+      <ul class="nav-menu">
+      
+        <li class="nav-item" data-path="/">
+          
+            <a href="/">主页</a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          
+            <a href="/archives/">归档</a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          
+            <a href="/categories/">分类</a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          
+            <a href="/tags/">标签</a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          
+            <a href="/about/">关于</a>
+          
+        </li>
+      
+      </ul>
+    </nav>
+    <i class="iconfont icon-menu"></i>
+  </header>
+</div>
+
+<script>
+  let links = document.querySelectorAll('.nav-item');
+  for(let link of links){
+    let childrenLink = link.querySelector('ul');
+    link.addEventListener('mouseenter', () => {
+      if(childrenLink) {
+        childrenLink.className = "nav-menu--dropdown active";
+      }
+    })
+    link.addEventListener('mouseleave', () => {
+      if(childrenLink) {
+        childrenLink.className = "nav-menu--dropdown";
+      }
+    })
+  }
+  let rootRealPath = getRealPath(window.location.pathname, true);
+  for(let link of links) {
+    let linkPath = link.getAttribute("data-path");
+    if(linkPath && getRealPath(linkPath, true) === rootRealPath) {
+      link.className = "nav-item hover";
+    }
+  }
+
+  let iconMenu = document.querySelector("i.iconfont.icon-menu"),
+    iconMenuClicked = false;
+  let navDOM = document.querySelector("nav.site-navigation");
+  iconMenu.addEventListener("click", () => {
+    iconMenuClicked 
+      ? navDOM.className = "site-navigation active"
+      : navDOM.className = "site-navigation";
+    iconMenuClicked = !iconMenuClicked;
+  })
+</script>
+
+      
+
+
+
+
+
+
+
+
+<div class="container">
+
+  
+<div>
+  <div class="post">
+    <h1 class="article-title">
+      <span>《JavaScript高级程序设计》---面向对象的程序设计(1)</span>
+    </h1>
+    <div class="article-top-meta">
+      <span>
+        发布 : 
+        2018-11-25
+      </span>
+      <span>
+        分类 : 
+          
+            <a href="/categories/JavaScript/">
+              JavaScript
+            </a>
+          
+      </span>
+      <span>
+        浏览 : <span class="article-timer" data-identity="《JavaScript高级程序设计》-面向对象的程序设计-1"></span>
+      </span>
+    </div>
+    <div class="article-content">
+      <div class="markdown-body">
+        <p>面向对象语言都有一个标志，那就是类。在JavaScript中没有类的概念，因此它实现面向对象的和传统的面向对象语言有所不同。</p>
+<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><h3 id="Namespace-命名空间"><a href="#Namespace-命名空间" class="headerlink" title="Namespace 命名空间"></a>Namespace 命名空间</h3><p>允许开发人员在一个独特, 应用相关的名字的名称下捆绑所有功能的容器。</p>
+<p>在 JavaScript中是一个包含方法、属性和对象的对象。</p>
+<p>值的注意的是：<strong>JavaScript的普通对象和命名空间在语言上是没有区别的</strong>。</p>
+<p>创造命名空间的想法很简单：一个全局对象被创建，所有的变量，方法和功能成为该对象的属性。使用命名空间也最大程度地减少应用程序的名称冲突的可能性。</p>
+<h3 id="Class-类"><a href="#Class-类" class="headerlink" title="Class 类"></a>Class 类</h3><p>定义对象的特征。它是对象的属性和方法的模板定义.</p>
+<p>JavaScript是一种基于原型的语言，它没类的声明语句。但是，可用方法作类，定义一个类跟定义一个函数一样简单。</p>
+<h3 id="Object-对象"><a href="#Object-对象" class="headerlink" title="Object 对象"></a>Object 对象</h3><p>类的一个实例。</p>
+<h3 id="Property-属性"><a href="#Property-属性" class="headerlink" title="Property 属性"></a>Property 属性</h3><p>对象的特征，比如颜色。</p>
+<p>属性就是 类中包含的变量;每一个对象实例有若干个属性. 为了正确的继承，属性应该被定义在类的原型属性 (函数)中。</p>
+<h3 id="Method-方法"><a href="#Method-方法" class="headerlink" title="Method 方法"></a>Method 方法</h3><p>对象的能力，比如行走。</p>
+<p>方法与属性很相似， 不同的是：一个是函数，另一个可以被定义为函数。 调用方法很像存取一个属性,  不同的是add () 在方法名后面很可能带着参数. 为定义一个方法, 需要将一个函数赋值给类的 prototype 属性; 这个赋值给函数的名称就是用来给对象在外部调用它使用的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function Person(firstName) &#123;</span><br><span class="line">  this.firstName = firstName;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.sayHello = function() &#123;</span><br><span class="line">  alert(&quot;你好，我是&quot; + this.firstName);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var person1 = new Person(&quot;张三&quot;);</span><br><span class="line">var person2 = new Person(&quot;李四&quot;);</span><br><span class="line"></span><br><span class="line">person1.sayHello(); // alerts &quot;你好，我是张三&quot;</span><br><span class="line">person2.sayHello(); // alerts &quot;你好，我是李四&quot;</span><br></pre></td></tr></table></figure>
+<p>方法是一个普通函数，所以它可以在context之外调用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function Person(firstName) &#123;</span><br><span class="line">  this.firstName = firstName;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.sayHello = function() &#123;</span><br><span class="line">  alert(&quot;你好，我是&quot; + this.firstName);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var person1 = new Person(&quot;张三&quot;);</span><br><span class="line">var person2 = new Person(&quot;李四&quot;);</span><br><span class="line">var helloFunction = person1.sayHello;</span><br><span class="line"></span><br><span class="line">person1.sayHello();       // alerts &quot;你好，我是张三&quot;</span><br><span class="line">person2.sayHello();       // alerts &quot;你好，我是李四&quot;</span><br><span class="line">helloFunction();          // alerts &quot;你好，我是undefined&quot;</span><br><span class="line">console.log(helloFunction === person1.sayHello);          // true</span><br><span class="line">console.log(helloFunction === Person.prototype.sayHello); // true</span><br></pre></td></tr></table></figure></p>
+<p>上述例子也说明了this是代表当前对象<br>当从变量 helloFunction()中调用的时候， this就被设置成了全局对象 (在浏览器中即window)<br>可以使用apply或call显性的是这this的值。<br><code>helloFunction.call(person1);   // alerts &quot;你好，我是张三&quot;</code></p>
+<h3 id="Constructor-构造函数"><a href="#Constructor-构造函数" class="headerlink" title="Constructor 构造函数"></a>Constructor 构造函数</h3><p>对象初始化的瞬间, 被调用的方法. 通常它的名字与包含它的类一致.</p>
+<p>在JavaScript,中函数就可以作为构造器使用,因此不需要特别地定义一个构造器方法. 每个声明的函数都可以在实例化后被调用执行</p>
+<p>构造器常用于给对象的属性赋值或者为调用函数做准备。</p>
+<p><strong>Person类实例化时构造器调用一个 alert函数</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function Person() &#123;</span><br><span class="line">  alert(&apos;Person instantiated&apos;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var person1 = new Person();</span><br><span class="line">var person2 = new Person();</span><br></pre></td></tr></table></figure></p>
+<h3 id="Inheritance-继承"><a href="#Inheritance-继承" class="headerlink" title="Inheritance 继承"></a>Inheritance 继承</h3><p>一个类可以继承另一个类的特征。</p>
+<p>在Javascript中，继承通过赋予子类一个父类的实例并专门化子类来实现。</p>
+<p>下面的例子中, 我们定义了 Student类作为 Person类的子类. 之后我们重定义了sayHello() 方法并添加了 sayGoodBye() 方法.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">// 定义Person构造器</span><br><span class="line">function Person(firstName) &#123;</span><br><span class="line">  this.firstName = firstName;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 在Person.prototype中加入方法</span><br><span class="line">Person.prototype.walk = function()&#123;</span><br><span class="line">  alert(&quot;I am walking!&quot;);</span><br><span class="line">&#125;;</span><br><span class="line">Person.prototype.sayHello = function()&#123;</span><br><span class="line">  alert(&quot;Hello, I&apos;m &quot; + this.firstName);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 定义Student构造器</span><br><span class="line">function Student(firstName, subject) &#123;</span><br><span class="line">  // 调用父类构造器, 确保(使用Function#call)&quot;this&quot; 在调用过程中设置正确</span><br><span class="line">  Person.call(this, firstName);</span><br><span class="line"></span><br><span class="line">  // 初始化Student类特有属性</span><br><span class="line">  this.subject = subject;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 建立一个由Person.prototype继承而来的Student.prototype对象.</span><br><span class="line">// 注意: 常见的错误是使用 &quot;new Person()&quot;来建立Student.prototype.</span><br><span class="line">// 这样做的错误之处有很多, 最重要的一点是我们在实例化时</span><br><span class="line">// 不能赋予Person类任何的FirstName参数</span><br><span class="line">// 调用Person的正确位置如下，我们从Student中来调用它</span><br><span class="line">Student.prototype = Object.create(Person.prototype); // See note below</span><br><span class="line"></span><br><span class="line">// 设置&quot;constructor&quot; 属性指向Student</span><br><span class="line">Student.prototype.constructor = Student;</span><br><span class="line"></span><br><span class="line">// 更换&quot;sayHello&quot; 方法</span><br><span class="line">Student.prototype.sayHello = function()&#123;</span><br><span class="line">  console.log(&quot;Hello, I&apos;m &quot; + this.firstName + &quot;. I&apos;m studying &quot; + this.subject + &quot;.&quot;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 加入&quot;sayGoodBye&quot; 方法</span><br><span class="line">Student.prototype.sayGoodBye = function()&#123;</span><br><span class="line">  console.log(&quot;Goodbye!&quot;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 测试实例:</span><br><span class="line">var student1 = new Student(&quot;Janet&quot;, &quot;Applied Physics&quot;);</span><br><span class="line">student1.sayHello();   // &quot;Hello, I&apos;m Janet. I&apos;m studying Applied Physics.&quot;</span><br><span class="line">student1.walk();       // &quot;I am walking!&quot;</span><br><span class="line">student1.sayGoodBye(); // &quot;Goodbye!&quot;</span><br><span class="line"></span><br><span class="line">// Check that instanceof works correctly</span><br><span class="line">console.log(student1 instanceof Person);  // true </span><br><span class="line">console.log(student1 instanceof Student); // true</span><br></pre></td></tr></table></figure>
+<h3 id="Encapsulation-封装"><a href="#Encapsulation-封装" class="headerlink" title="Encapsulation 封装"></a>Encapsulation 封装</h3><p>一种把数据和相关的方法绑定在一起使用的方法.</p>
+<p>Student类虽然不需要知道Person类的walk()方法是如何实现的，但是仍然可以使用这个方法；Student类不需要明确地定义这个方法，除非我们想改变它。 这就叫做封装，对于所有继承自父类的方法，只需要在子类中定义那些你想改变的即可。</p>
+<h3 id="Abstraction-抽象"><a href="#Abstraction-抽象" class="headerlink" title="Abstraction 抽象"></a>Abstraction 抽象</h3><p>结合复杂的继承，方法，属性的对象能够模拟现实的模型。</p>
+<h3 id="Polymorphism-多态"><a href="#Polymorphism-多态" class="headerlink" title="Polymorphism 多态"></a>Polymorphism 多态</h3><p>多意为‘许多’，态意为‘形态’。不同类可以定义相同的方法或属性。</p>
+<p>就像所有定义在原型属性内部的方法和属性一样，不同的类可以定义具有相同名称的方法;方法是作用于所在的类中。并且这仅在两个类不是父子关系时成立（继承链中，一个类不是继承自其他类）。</p>
+<h2 id="理解对象属性"><a href="#理解对象属性" class="headerlink" title="理解对象属性"></a>理解对象属性</h2><h3 id="创建自定义对象"><a href="#创建自定义对象" class="headerlink" title="创建自定义对象"></a>创建自定义对象</h3><p>方法一：通过Object创建一个实例，再为它添加属性和方法；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var person = new Object();</span><br><span class="line">person.name = &quot;winnie&quot;;</span><br><span class="line">person.age = 26;</span><br><span class="line">person.job = &quot;Font Enginner&quot;;</span><br><span class="line"></span><br><span class="line">person.sayName = function()&#123;</span><br><span class="line">    alert(this.name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>方法二：通过字面的方法创建对象—-手动的写出对象的内容来创建一个对象.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var person = &#123;</span><br><span class="line">    name: &quot;winnie&quot;,</span><br><span class="line">    age: 26,</span><br><span class="line">    job: &quot;Font Enginner&quot;,</span><br><span class="line">    sayName: function()&#123;</span><br><span class="line">        alert(this.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>当你想要传输一些有结构和关联的资料时常见的方式是使用字面量来创建一个对象<br>关键字”this”指向了当前代码运行时的对象</p>
+</blockquote>
+<h3 id="属性类型"><a href="#属性类型" class="headerlink" title="属性类型"></a>属性类型</h3><p>ECMAScript中有两种属性：数据属性和访问器属性</p>
+<h4 id="数据属性"><a href="#数据属性" class="headerlink" title="数据属性"></a>数据属性</h4><p>包含一个数据值的位置，这个位置可以读取写入，它有4个描述行为的特征</p>
+<ul>
+<li>[[Configurable]]:表示是否具有可以删除和可修改的特性，默认值：true</li>
+<li>[[Enumerable]]:表示是否具有可以通过for-in返回的属性，默认值：true</li>
+<li>[[writable]]:表示包含可以修改的属性的值，默认值：true</li>
+<li>[[value]]:表示包含这个属性的数据值，默认值：undefined</li>
+</ul>
+<p>修改默认属性特性，需要通过<code>Object.defineProperty()</code>方法，但是当[[Configurable]]为false后，就不能在修改属性特征了；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var person = &#123;&#125;;</span><br><span class="line">Object.defineProperty(person,&quot;name&quot;,&#123;</span><br><span class="line">    wirtable: false,</span><br><span class="line">    value: &quot;Winnie&quot;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">person.name  // Winnie</span><br><span class="line">person.name = &quot;章三&quot;; // 不可修改</span><br><span class="line">person.name  // Winnie</span><br></pre></td></tr></table></figure>
+<h4 id="访问器属性"><a href="#访问器属性" class="headerlink" title="访问器属性"></a>访问器属性</h4><p>不包含数据值，只包含了一对getter和setter函数，再读取访问器属性时调用了getter，写入时调用了setter，访问器属性有如下四个特征</p>
+<ul>
+<li>[[Configurable]]:表示是否具有可以删除和可修改的特性，默认值：true</li>
+<li>[[Enumerable]]:表示是否具有可以通过for-in返回的属性，默认值：true</li>
+<li>[[Get]]:读取属性时调用的函数，默认值：undefined</li>
+<li>[[Set]]:写入属性时调用的函数，默认值：undefined</li>
+</ul>
+<p><em>访问器属性不能直接定义，需要通过Object.defineProperty()来定义</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var book = &#123;</span><br><span class="line">    _year: 2004,</span><br><span class="line">    edition: 1</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Object.defineProperty(book,&quot;year&quot;,&#123;</span><br><span class="line">    get: function()&#123;</span><br><span class="line">        return this._year;</span><br><span class="line">    &#125;,</span><br><span class="line">    set: function(newValue)&#123;</span><br><span class="line">        if (newValue &gt; 2004) &#123;</span><br><span class="line">            this._year = newValue;</span><br><span class="line">            this.edition += newValue - 2004;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="定义多个属性"><a href="#定义多个属性" class="headerlink" title="定义多个属性"></a>定义多个属性</h3><p>可以使用<code>Object。defineProperties()</code>一次定义多个属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">var book = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">Object.defineProperites(book,&#123;</span><br><span class="line">    _year:&#123;</span><br><span class="line">        wirtable: true,</span><br><span class="line">        value: 2004</span><br><span class="line">    &#125;,</span><br><span class="line">    edition:&#123;</span><br><span class="line">        writable: true,</span><br><span class="line">        value:1</span><br><span class="line">    &#125;,</span><br><span class="line">    year:&#123;</span><br><span class="line">        get:function()&#123;</span><br><span class="line">            return this._year;</span><br><span class="line">        &#125;,</span><br><span class="line">        set:function(newValue)&#123;</span><br><span class="line">            if(newValue &gt; 2004) &#123;</span><br><span class="line">                this._year = newValue;</span><br><span class="line">                this.edition += newValue - 2004;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在详细展开之前，先对面向对象的三个特征要一个了解<strong>封装、继承、多态</strong></p>
+</blockquote>
+<h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><p>封装用于阐述对象所包含的内容，通常由两部分组成</p>
+<ul>
+<li>相关的数据（用于储存属性）</li>
+<li>基于这些数据所能做的事（所能调用的方法）</li>
+</ul>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>通过继承这种方式，我们可以非常优雅的实现对现有代码的复用。在JavaScript中继承就是用过对对象的继承来实现的。</p>
+<h3 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h3><p>不同对象通过相同的方法调用来实现各自行为的能力叫多态</p>
+<h2 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h2><p>虽然开始提到的Object构造器和字面量的方式都可以用来创建对象，但是使用同一个接口创建很多对象，会产生大量的重复代码。<br>为了使代码更有效率就引出了<strong>设计模式</strong>，这里只说JavaScript高程中和创建对象有关的设计模式，其他的在以后会单独细谈。</p>
+<ul>
+<li>工厂模式</li>
+<li>构造函数模式</li>
+<li>原型模式</li>
+<li>组合使用构造函数和原型模式</li>
+<li>动态原型模式</li>
+<li>寄生构造函数模式</li>
+<li>稳妥构造函数模式</li>
+</ul>
+<h3 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h3><p>为了<strong>解决创建多个相似对象的问题</strong>，抽象了创建具体对象的过程，但是<strong>没有解决对象识别的问题</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function createPerson(name, age, job)&#123;</span><br><span class="line">    var o = new Object();</span><br><span class="line">    o.name = name;</span><br><span class="line">    o.age = age;</span><br><span class="line">    o.job = job;</span><br><span class="line">    o.sayName = function()&#123;</span><br><span class="line">        alert(this.name);</span><br><span class="line">    &#125;</span><br><span class="line">    return o;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var person1 = createPerson(&apos;zhangsan&apos;,29,&apos;teacher&apos;);</span><br><span class="line">var person2 = createPerson(&apos;lisi&apos;,28,&apos;enginner&apos;);</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>(未完待续。。。)</p>
+      </div>
+    </div>
+    <div class="copy-right">
+      <div class="markdown-body">
+        <blockquote>
+        <p>本文作者：橙汁菌<br>
+        本文链接： <a href="">https://songhuizhang.github.io/2018/11/25/《JavaScript高级程序设计》-面向对象的程序设计-1/</a><br>
+        版权声明： 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</p>
+        </blockquote>
+      </div>
+    </div>
+    <div class="article-footer">
+      <div class="article-meta pull-left">
+        <span>
+          <i class="iconfont icon-06tags"></i>标签: 
+          
+            
+            <span class="span--tag">
+              <a href="/tags/JavaScript高级程序设计/">
+                #JavaScript高级程序设计
+              </a>
+            </span>
+            
+            <span class="span--tag">
+              <a href="/tags/面向对象/">
+                #面向对象
+              </a>
+            </span>
+            
+          
+        </span>
+      </div>
+      <div class="article-meta pull-right">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+setTimeout(generateToc, 1000);
+</script>
+
+  <nav class="post-navigation">
+    
+      <div class="nav-pre">
+        <i class="iconfont icon-prev"></i>
+        上一篇:
+        <a href="/2018/11/22/前端持续集成开发环境/" target="_self">前端持续集成开发环境</a>
+      </div>
+    
+    
+      <div class="nav-next">
+        下一篇:
+        <a href="/2018/11/26/前端浏览器缓存问题/" target="_self">前端浏览器缓存问题</a>
+        <i class="iconfont icon-next"></i>
+      </div>
+    
+  </nav>
+
+  <a href="#comment" class="comment-anchor"></a>
+  <div class="comment-title"><i class="iconfont icon-footprint"></i> 留下足迹 <i class="iconfont icon-footprint"></i></div>
+  <div id="vcomments"></div>
+
+  <script defer>
+  if( true ) {
+    let path = getRealPath()
+    new Valine({
+      el: "#vcomments",
+      appId: "plLkYqtTUBUhTHQdPgLazsI6-gzGzoHsz",
+      appKey: "0m3Em9TAssXfEC3PPtu7Md51",
+      notify: false,
+      verify: false,
+      avatar: "robohash",
+      placeholder: "正确填写邮箱, 才能及时收到回复哦♪(^∇^*)",
+      path
+    });
+  }
+</script>
+
+  <script defer>
+const valineAPI = (() => {
+  try {
+    AV.init("plLkYqtTUBUhTHQdPgLazsI6-gzGzoHsz", "0m3Em9TAssXfEC3PPtu7Md51");
+  } catch(error) {}
+  const isExist = (identity) => {
+    identity = identity || getRealPath();
+    let query = new AV.Query('Timer');
+    return new Promise((resolve, reject) => {
+      query.equalTo("identity", identity);
+      query.find().then(results => {
+        resolve(results.length > 0);
+      }, error => reject(error));
+    })
+  }
+
+  const _get = (identity) => {
+    let query = null;
+    if(identity && identity instanceof Array){
+      let querys = [];
+      for(let i = 0; i < identity.length; ++i) {
+        querys[i] = new AV.Query('Timer');
+        querys[i].equalTo('identity', identity[i]);
+      }
+      query = AV.Query.or.apply(null ,querys);
+    } else {
+      identity = identity || getRealPath();
+      query = new AV.Query("Timer");
+      query.equalTo("identity", identity);
+    }
+
+    return new Promise((resolve, reject) => {
+      query.find()
+      .then(results => resolve(results))
+      .catch(error => reject(error))
+    })
+  }
+
+  const create = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let Todo = AV.Object.extend('Timer');
+      let todo = new Todo();
+      todo.set("times", 1);
+      todo.set("identity", identity);
+      todo.save().then(res => resolve(true), error => reject(error));
+    })
+  }
+
+  const update = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let query = new AV.Query('Timer');
+      query.equalTo("identity", identity);
+      query.find().then(todos => {
+        todos.forEach(todo => {
+          todo.set("times", todo.attributes.times + 1);
+        });
+        return AV.Object.saveAll(todos);
+      }).then(todos => resolve(true), error => reject(error));
+    })
+  }
+
+  return {
+    isExist,
+    _get,
+    update,
+    create
+  }
+})()
+
+const calcAndWriteTimes = () => {
+  let isPost = true;
+
+  let timerAllDOM = document.querySelectorAll(".article-timer");
+
+  if(isPost) {
+    let identity = timerAllDOM[0].getAttribute("data-identity");
+    valineAPI.isExist(identity)
+    .then(exist => {
+      if(exist) {
+        return valineAPI.update(identity);
+      }
+      return new Promise(resolve => resolve(true));
+    })
+    .then( succuess => valineAPI._get(identity))
+    .then( result => timerAllDOM[0].innerText = result[0].attributes.times)
+    .catch(error => console.log(error.message))
+    return ;
+  }
+
+  let timerDOMCache = {};
+
+  for(let timerDOM of timerAllDOM) {
+    let identity = timerDOM.getAttribute("data-identity");
+    timerDOMCache[identity] = {
+      dom: timerDOM,
+      times: undefined
+    };
+  }
+
+  let identities = Object.keys(timerDOMCache);
+  valineAPI._get(identities).then(results => {
+    for(let result of results) {
+      let {identity, times} = result.attributes;
+      timerDOMCache[identity].times = times;
+      timerDOMCache[identity].dom.innerText = times;
+    }
+    for(let identity of identities) {
+      if(timerDOMCache[identity].times){
+        continue;
+      }
+      timerDOMCache[identity].dom.innerText = 1;
+      valineAPI.create(identity);
+    }
+  }).catch(error => console.log(error.message))
+}
+
+if(true){
+  calcAndWriteTimes();
+}
+</script>
+
+</div>
+
+
+      <script>
+  let isMathjaxConfig = false; // 防止重复调用Config，造成性能损耗
+
+  const initMathjaxConfig = () => {
+    if (!window.MathJax) {
+      return;
+    }
+    window.MathJax.Hub.Config({
+      showProcessingMessages: false, //关闭js加载过程信息
+      messageStyle: "none", //不显示信息
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]], //行内公式选择符
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]], //段内公式选择符
+        skipTags: ["script", "noscript", "style", "textarea", "pre", "code", "a"] //避开某些标签
+      },
+      "HTML-CSS": {
+        availableFonts: ["STIX", "TeX"], //可选字体
+        showMathMenu: false //关闭右击菜单显示
+      }
+    });
+    isMathjaxConfig = true; // 
+  };
+  if (isMathjaxConfig === false) { // 如果：没有配置MathJax
+    initMathjaxConfig();
+  }
+  window.MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById('app')]);
+  
+</script>
+<footer>
+  <p class="site-info">
+    © 2018 <a href="https://github.com/songhuizhang">橙汁菌</a>  已运行<span id="time-to-now"></span><span class="my-face">(●'◡'●)ﾉ♥</span>
+    <br>
+    Powered by <a href="https://hexo.io">Hexo</a> | Theme - <a href="https://github.com/dongyuanxin/theme-bmw">BMW</a>
+    <br>
+  </p>
+</footer>
+
+<script>
+const timeToNowDOM = document.querySelector("#time-to-now");
+const startTimestamp = new Date(2018, 11, 12, 22, 55).getTime();
+
+const updateTimeStr = () => {
+  let offset = parseInt(
+      (new Date().getTime() - startTimestamp) / 1000,
+      10
+    ),
+    day = Math.floor(offset / 86400),
+    hour = Math.floor((offset % 86400) / 3600),
+    minute = Math.floor(((offset % 86400) % 3600) / 60),
+    second = Math.floor(((offset % 86400) % 3600) % 60);
+  timeToNowDOM.innerHTML =
+    day + "天" + hour + "小时" + minute + "分钟" + second + "秒";
+  setTimeout(updateTimeStr, 500);
+}
+
+setTimeout(updateTimeStr, 500);
+</script>
+
+      <div class="back-to-top hidden">
+  <span>
+    <i class="iconfont icon-60"></i><span></span>%
+  </span>
+</div>
+
+<script>
+const updateIconToTop = percent => {
+  let dom = document.querySelector(".back-to-top span span");
+  dom.innerText = percent;
+  if(percent < 1) {
+    document.querySelector(".back-to-top").className = "back-to-top hidden";
+  } else {
+    document.querySelector(".back-to-top").className = "back-to-top";
+  }
+}
+
+const handleScoll = () => {
+  let isRunning = false;
+  return () => {
+    if (isRunning) return;
+    isRunning = true;
+    window.requestAnimationFrame(timestamp => {
+      let scrollTop =
+          document.documentElement.scrollTop || document.body.scrollTop,
+        scrollHeight =
+          document.documentElement.scrollHeight ||
+          document.body.scrollHeight,
+        clientHeight =
+          document.documentElement.clientHeight ||
+          document.body.clientHeight;
+      isRunning = false;
+      if (scrollTop <= 1) {
+        updateIconToTop(0);
+        return;
+      }
+      if (scrollTop + clientHeight >= scrollHeight) {
+        updateIconToTop(100);
+      } else {
+        updateIconToTop(parseInt(
+          100 * scrollTop / (scrollHeight - clientHeight),
+          10
+        ));
+      }
+    });
+  };
+}
+
+const backToTop = () => {
+  let scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop,
+    delay = 10,
+    time = 200;
+  if (scrollTop <= 20) {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    return;
+  }
+  let step = Math.ceil(scrollTop * delay / time);
+  let timer = setInterval(() => {
+    scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop;
+    if (scrollTop - step <= 0) {
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      clearInterval(timer);
+    } else {
+      document.documentElement.scrollTop = scrollTop - step;
+      document.body.scrollTop = scrollTop - step;
+    }
+  }, delay);
+}
+
+document.addEventListener("scroll", handleScoll(), false);
+
+document.querySelector(".back-to-top").addEventListener("click", backToTop, false);
+
+</script>
+
+      <aside id="sidebar">
+        <p id="sidebar-header"></p>
+        <ol id="sidebar-toc"></ol>
+      </aside>
+
+    </div>
+  </body>
+
+</html>

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="橙汁菌, songhui25262@gmail.com">
+  
+  
+  
+  <title>《JavaScript高级程序设计》---面向对象的程序设计(2) | 橙汁菌的小屋</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="JavaScript高级程序设计,面向对象,">
+  
+
+  
+    <meta name="description" content="什么都有的树洞。">
+  
+
+  
+    <link rel="alternate" href="/atom.xml" title="橙汁菌的小屋" type="application/atom+xml">
+  
+
+  
+    <link rel="icon" href="/images/bitbug_favicon.ico">
+    <link rel="apple-touch-icon" href="/images/Milk-beverage-water.png">
+  
+
+  
+
+  <link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/icon/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
+
+  <script src="/js/util.js"></script>
+<script src="/js/valine.min.js"></script>
+  
+  <script src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js" async></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.0/dist/av-min.js"></script>
+
+</head>
+
+  <body>
+
+    
+
+    <div id="app">
+
+      <div class="header-wrap">
+  <header>
+    <div class="site-brand">
+      <div class="site-title">
+        <a href="/">橙汁菌</a>
+      </div>
+    </div>
+    <nav class="site-navigation">
+      <ul class="nav-menu">
+      
+        <li class="nav-item" data-path="/">
+          
+            <a href="/">主页</a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          
+            <a href="/archives/">归档</a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          
+            <a href="/categories/">分类</a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          
+            <a href="/tags/">标签</a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          
+            <a href="/about/">关于</a>
+          
+        </li>
+      
+      </ul>
+    </nav>
+    <i class="iconfont icon-menu"></i>
+  </header>
+</div>
+
+<script>
+  let links = document.querySelectorAll('.nav-item');
+  for(let link of links){
+    let childrenLink = link.querySelector('ul');
+    link.addEventListener('mouseenter', () => {
+      if(childrenLink) {
+        childrenLink.className = "nav-menu--dropdown active";
+      }
+    })
+    link.addEventListener('mouseleave', () => {
+      if(childrenLink) {
+        childrenLink.className = "nav-menu--dropdown";
+      }
+    })
+  }
+  let rootRealPath = getRealPath(window.location.pathname, true);
+  for(let link of links) {
+    let linkPath = link.getAttribute("data-path");
+    if(linkPath && getRealPath(linkPath, true) === rootRealPath) {
+      link.className = "nav-item hover";
+    }
+  }
+
+  let iconMenu = document.querySelector("i.iconfont.icon-menu"),
+    iconMenuClicked = false;
+  let navDOM = document.querySelector("nav.site-navigation");
+  iconMenu.addEventListener("click", () => {
+    iconMenuClicked 
+      ? navDOM.className = "site-navigation active"
+      : navDOM.className = "site-navigation";
+    iconMenuClicked = !iconMenuClicked;
+  })
+</script>
+
+      
+
+
+
+
+
+
+
+
+<div class="container">
+
+  
+<div>
+  <div class="post">
+    <h1 class="article-title">
+      <span>《JavaScript高级程序设计》---面向对象的程序设计(2)</span>
+    </h1>
+    <div class="article-top-meta">
+      <span>
+        发布 : 
+        2018-12-03
+      </span>
+      <span>
+        分类 : 
+          
+      </span>
+      <span>
+        浏览 : <span class="article-timer" data-identity="《JavaScript高级程序设计》-面向对象的程序设计-2"></span>
+      </span>
+    </div>
+    <div class="article-content">
+      <div class="markdown-body">
+        <h2 id="构造函数模式"><a href="#构造函数模式" class="headerlink" title="构造函数模式"></a>构造函数模式</h2><p>首先说一下构造函数，分为两种：原声构造函数，自定义构造函数。</p>
+<p>原声构造函数：在Javascript中Object、Function和Array等在运行是会自动出现在执行环境中。</p>
+<p>自定义构造函数：其实就是一个用来创建对象的函数，按照惯例首字母大写。</p>
+<p>注：</p>
+<pre><code>- 没有显示的创建对象，使用必须用new操作符
+- 直接讲属性赋给this对象
+- 没有return
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function Person（name, age, job）&#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.age = age;</span><br><span class="line">    this.job = job;</span><br><span class="line">    this.hello = function()&#123;</span><br><span class="line">        return &apos;Hello,I am &apos;+this.name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var person1 = new Person(&apos;sam&apos;,16,&apos;doctor&apos;);</span><br><span class="line">var person2 = new Person(&apos;tom&apos;,17,&apos;student&apos;);</span><br></pre></td></tr></table></figure>
+<p>一般使用instanceof来检验对象类型；<code>person1 instanceof Person // true</code>;<br>这一点就是它优于工厂模式的地方，<strong>它将实例标示为一种特定的类型</strong>。</p>
+<p>缺点：</p>
+<ol>
+<li><p>直接按照函数方式调用构造函数，那么内部的this将直接指向window对象。也就是说将会污染命名空间。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Person(&apos;lin&apos;,15,&apos;xxx&apos;);</span><br><span class="line">window.name //lin</span><br><span class="line">window.age // 15</span><br><span class="line">window.hello()  // Hello,I am lin</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>每次使用构造函数创建对象，都会将内部的方法重新创建一遍。</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var person1 = new(&apos;test1&apos;,11,&apos;xxx&apos;);</span><br><span class="line">var person2 = new(&apos;test2&apos;,11,&apos;xxx&apos;);</span><br><span class="line"></span><br><span class="line">person1.hello // function()&#123;</span><br><span class="line">      return &apos;Hello,I am &apos;+this.name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">person2.hello // function()&#123;</span><br><span class="line">      return &apos;Hello,I am &apos;+this.name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">person1.hello === person2.hello  // false</span><br></pre></td></tr></table></figure>
+<h2 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h2><p>上面构造器模式创建对象时，会重复的重建新的方法的缺点可以使用原型模式来解决。</p>
+<p>每个函数都有一个prototype（原型）属性，这个属性是一个指针，指向一个包含特定类型的所有实例共享的属性和方法。原型就是通过调用构造函数而创建的那个示例的原型对象（模版）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function Person()&#123; &#125;;</span><br><span class="line"></span><br><span class="line">Person.prototype.name = &apos;张三&apos;;</span><br><span class="line">Person.prototype.age = &apos;25&apos;;</span><br><span class="line">Person.prototype.job = &apos;前端&apos;;</span><br><span class="line">Person.prototype.sayName = function()&#123;</span><br><span class="line">    alert(this.name);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var person1 = new Person();</span><br><span class="line">person1.sayName();  // 张三</span><br><span class="line"></span><br><span class="line">var person2 = new Person();</span><br><span class="line">person2.sayName();  // 张三</span><br><span class="line"></span><br><span class="line">person1.sayName === person2.sayName // true</span><br></pre></td></tr></table></figure>
+<h3 id="原型对象"><a href="#原型对象" class="headerlink" title="原型对象"></a>原型对象</h3><p>只要创建一个新函数，就很根据一组特定的规则为该函数创建一个prototype属性，这个属性是一个指针，指向得就是原型对象。</p>
+<p>所有的原型对象都会自动获得一个constructor(构造函数)属性，这个属性是一个指向prototype属性所在函数的指针。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Person.prototype.constructor === Person;  // true</span><br></pre></td></tr></table></figure>
+<p><strong>Person的每个实例都有一个内部属性指向它的原型对象Person.prototype，  [[Prototype]]  <strong>proto</strong></strong></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>用途</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hasOwnProperty()</td>
+<td>用来检测一个属性是否存在于实例中</td>
+<td>`person1.hasOwnProperty(‘name’)  // true</td>
+<td></td>
+<td>false`</td>
+</tr>
+<tr>
+<td>isPrototypeOf()</td>
+<td>用来检测一个实例的是否是某原型对象</td>
+<td>`Person.prototype.isPrototypeOf(person1)  // true</td>
+<td></td>
+<td>false`</td>
+</tr>
+<tr>
+<td>getPrototypeOf()</td>
+<td>用来某实例的原型对象</td>
+<td><code>Object.getPrototypeOf(person1)  // person1.prototype</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="原型与-in-操作符"><a href="#原型与-in-操作符" class="headerlink" title="原型与 in 操作符"></a>原型与 in 操作符</h3><p>单独使用：能够通过对象访问给定属性时返回true，无论该属性存在于实例还是原型中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var Person = function ()&#123; &#125;;</span><br><span class="line">Person.prototype.name = &quot;zhangsan&quot;;</span><br><span class="line"></span><br><span class="line">var person1 = new Person();</span><br><span class="line">person1.name = &quot;lisi&quot;;</span><br><span class="line">&quot;name&quot; in person1  // true;</span><br><span class="line"></span><br><span class="line">delete person1.name;</span><br><span class="line">person1.hasOwnPropertyOf(&apos;name&apos;);  // false</span><br><span class="line">&quot;name&quot; in person1  // true;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>用途</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>in</td>
+<td>检验对象是否能查询到某属性</td>
+<td>`”name” in person1 // true</td>
+<td></td>
+<td>false`</td>
+</tr>
+<tr>
+<td>keys()</td>
+<td>接受一个对象，返回其所有可枚举的属性字符串数组</td>
+<td><code>Object.keys(Person.prototype)  // [&#39;name&#39;]</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="更简单的原型语法"><a href="#更简单的原型语法" class="headerlink" title="更简单的原型语法"></a>更简单的原型语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function Person()&#123; &#125;;</span><br><span class="line"></span><br><span class="line">Person.prototype = &#123;</span><br><span class="line">    name: &apos;章三&apos;,</span><br><span class="line">    aga: 14,</span><br><span class="line">    job: &apos;xXX&apos;,</span><br><span class="line">    sayName: function()&#123;</span><br><span class="line">        return this.name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述代码可以不用再书写多次Person.prototype。但是<strong>其constructor不再指向Person</strong>，因为上述操作默认重写了prototype对象。</p>
+<p>造成如下变化：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var friend = new Person();</span><br><span class="line">friend instanceof Person; // true </span><br><span class="line">friend instanceof Objecy  // true</span><br><span class="line">friend.constructor === Person  // false</span><br><span class="line">friend.constructor === Objecy  // true</span><br></pre></td></tr></table></figure>
+<p>如果constructor很重要可以在原型设置时，重新回置到当前值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function Person()&#123; &#125;;</span><br><span class="line"></span><br><span class="line">Person.prototype = &#123;</span><br><span class="line">    constructor: Person,</span><br><span class="line">    name: &apos;章三&apos;,</span><br><span class="line">    aga: 14,</span><br><span class="line">    job: &apos;xXX&apos;,</span><br><span class="line">    sayName: function()&#123;</span><br><span class="line">        return this.name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：上述操作会使constructor属性变成可枚举的。</strong></p>
+<h3 id="原型的动态属性"><a href="#原型的动态属性" class="headerlink" title="原型的动态属性"></a>原型的动态属性</h3><p>以非字面量方式设置的原型属性是动态改变的，因为她们都指向同一个原型对象。但是重写原型对象会切断和之前已存在的对象实例之间的联系。</p>
+<h3 id="原生的对象原型"><a href="#原生的对象原型" class="headerlink" title="原生的对象原型"></a>原生的对象原型</h3><p>所有的原生引用型都在其构造函数上定义了方法，为了避免后续开发的命名冲突，应该避免修改、拓展原生对象的原型方法</p>
+<h3 id="原型对象的问题"><a href="#原型对象的问题" class="headerlink" title="原型对象的问题"></a>原型对象的问题</h3><ol>
+<li>省略了构造函数初始化传参数这一环节，导致后续的属性都是共享属性。</li>
+<li>因为其共享属性的特性，导致在引用类型的问题上会比较突出</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var Perons = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">Person.prototype = &#123;</span><br><span class="line">    name: &apos;章三&apos;,</span><br><span class="line">    friends: [&apos;lisi&apos;,&apos;wangwu&apos;],</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var person1 = new Person();</span><br><span class="line">person1.name = &quot;麻子&quot;</span><br><span class="line">var person2 = new Person();</span><br><span class="line">person1.name = &quot;sam&quot;</span><br><span class="line">person1.friends.push(&apos;grey&apos;);</span><br><span class="line">person1.friends  === person2.friends;</span><br></pre></td></tr></table></figure>
+<p>因为上述原因，很少会有人单独使用原型模式。</p>
+<hr>
+<p>（未完待续…）</p>
+<h2 id="组合使用构造函数模式和原型模式"><a href="#组合使用构造函数模式和原型模式" class="headerlink" title="组合使用构造函数模式和原型模式"></a>组合使用构造函数模式和原型模式</h2><h2 id="动态原型模式"><a href="#动态原型模式" class="headerlink" title="动态原型模式"></a>动态原型模式</h2><h2 id="寄生构造函数模式"><a href="#寄生构造函数模式" class="headerlink" title="寄生构造函数模式"></a>寄生构造函数模式</h2><h2 id="稳妥构造函数模式"><a href="#稳妥构造函数模式" class="headerlink" title="稳妥构造函数模式"></a>稳妥构造函数模式</h2>
+      </div>
+    </div>
+    <div class="copy-right">
+      <div class="markdown-body">
+        <blockquote>
+        <p>本文作者：橙汁菌<br>
+        本文链接： <a href="">https://songhuizhang.github.io/2018/12/03/《JavaScript高级程序设计》-面向对象的程序设计-2/</a><br>
+        版权声明： 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</p>
+        </blockquote>
+      </div>
+    </div>
+    <div class="article-footer">
+      <div class="article-meta pull-left">
+        <span>
+          <i class="iconfont icon-06tags"></i>标签: 
+          
+            
+            <span class="span--tag">
+              <a href="/tags/JavaScript高级程序设计/">
+                #JavaScript高级程序设计
+              </a>
+            </span>
+            
+            <span class="span--tag">
+              <a href="/tags/面向对象/">
+                #面向对象
+              </a>
+            </span>
+            
+          
+        </span>
+      </div>
+      <div class="article-meta pull-right">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+setTimeout(generateToc, 1000);
+</script>
+
+  <nav class="post-navigation">
+    
+      <div class="nav-pre">
+        <i class="iconfont icon-prev"></i>
+        上一篇:
+        <a href="/2018/12/01/正则表达式/" target="_self">正则表达式</a>
+      </div>
+    
+    
+  </nav>
+
+  <a href="#comment" class="comment-anchor"></a>
+  <div class="comment-title"><i class="iconfont icon-footprint"></i> 留下足迹 <i class="iconfont icon-footprint"></i></div>
+  <div id="vcomments"></div>
+
+  <script defer>
+  if( true ) {
+    let path = getRealPath()
+    new Valine({
+      el: "#vcomments",
+      appId: "plLkYqtTUBUhTHQdPgLazsI6-gzGzoHsz",
+      appKey: "0m3Em9TAssXfEC3PPtu7Md51",
+      notify: false,
+      verify: false,
+      avatar: "robohash",
+      placeholder: "正确填写邮箱, 才能及时收到回复哦♪(^∇^*)",
+      path
+    });
+  }
+</script>
+
+  <script defer>
+const valineAPI = (() => {
+  try {
+    AV.init("plLkYqtTUBUhTHQdPgLazsI6-gzGzoHsz", "0m3Em9TAssXfEC3PPtu7Md51");
+  } catch(error) {}
+  const isExist = (identity) => {
+    identity = identity || getRealPath();
+    let query = new AV.Query('Timer');
+    return new Promise((resolve, reject) => {
+      query.equalTo("identity", identity);
+      query.find().then(results => {
+        resolve(results.length > 0);
+      }, error => reject(error));
+    })
+  }
+
+  const _get = (identity) => {
+    let query = null;
+    if(identity && identity instanceof Array){
+      let querys = [];
+      for(let i = 0; i < identity.length; ++i) {
+        querys[i] = new AV.Query('Timer');
+        querys[i].equalTo('identity', identity[i]);
+      }
+      query = AV.Query.or.apply(null ,querys);
+    } else {
+      identity = identity || getRealPath();
+      query = new AV.Query("Timer");
+      query.equalTo("identity", identity);
+    }
+
+    return new Promise((resolve, reject) => {
+      query.find()
+      .then(results => resolve(results))
+      .catch(error => reject(error))
+    })
+  }
+
+  const create = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let Todo = AV.Object.extend('Timer');
+      let todo = new Todo();
+      todo.set("times", 1);
+      todo.set("identity", identity);
+      todo.save().then(res => resolve(true), error => reject(error));
+    })
+  }
+
+  const update = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let query = new AV.Query('Timer');
+      query.equalTo("identity", identity);
+      query.find().then(todos => {
+        todos.forEach(todo => {
+          todo.set("times", todo.attributes.times + 1);
+        });
+        return AV.Object.saveAll(todos);
+      }).then(todos => resolve(true), error => reject(error));
+    })
+  }
+
+  return {
+    isExist,
+    _get,
+    update,
+    create
+  }
+})()
+
+const calcAndWriteTimes = () => {
+  let isPost = true;
+
+  let timerAllDOM = document.querySelectorAll(".article-timer");
+
+  if(isPost) {
+    let identity = timerAllDOM[0].getAttribute("data-identity");
+    valineAPI.isExist(identity)
+    .then(exist => {
+      if(exist) {
+        return valineAPI.update(identity);
+      }
+      return new Promise(resolve => resolve(true));
+    })
+    .then( succuess => valineAPI._get(identity))
+    .then( result => timerAllDOM[0].innerText = result[0].attributes.times)
+    .catch(error => console.log(error.message))
+    return ;
+  }
+
+  let timerDOMCache = {};
+
+  for(let timerDOM of timerAllDOM) {
+    let identity = timerDOM.getAttribute("data-identity");
+    timerDOMCache[identity] = {
+      dom: timerDOM,
+      times: undefined
+    };
+  }
+
+  let identities = Object.keys(timerDOMCache);
+  valineAPI._get(identities).then(results => {
+    for(let result of results) {
+      let {identity, times} = result.attributes;
+      timerDOMCache[identity].times = times;
+      timerDOMCache[identity].dom.innerText = times;
+    }
+    for(let identity of identities) {
+      if(timerDOMCache[identity].times){
+        continue;
+      }
+      timerDOMCache[identity].dom.innerText = 1;
+      valineAPI.create(identity);
+    }
+  }).catch(error => console.log(error.message))
+}
+
+if(true){
+  calcAndWriteTimes();
+}
+</script>
+
+</div>
+
+
+      <script>
+  let isMathjaxConfig = false; // 防止重复调用Config，造成性能损耗
+
+  const initMathjaxConfig = () => {
+    if (!window.MathJax) {
+      return;
+    }
+    window.MathJax.Hub.Config({
+      showProcessingMessages: false, //关闭js加载过程信息
+      messageStyle: "none", //不显示信息
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]], //行内公式选择符
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]], //段内公式选择符
+        skipTags: ["script", "noscript", "style", "textarea", "pre", "code", "a"] //避开某些标签
+      },
+      "HTML-CSS": {
+        availableFonts: ["STIX", "TeX"], //可选字体
+        showMathMenu: false //关闭右击菜单显示
+      }
+    });
+    isMathjaxConfig = true; // 
+  };
+  if (isMathjaxConfig === false) { // 如果：没有配置MathJax
+    initMathjaxConfig();
+  }
+  window.MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById('app')]);
+  
+</script>
+<footer>
+  <p class="site-info">
+    © 2018 <a href="https://github.com/songhuizhang">橙汁菌</a>  已运行<span id="time-to-now"></span><span class="my-face">(●'◡'●)ﾉ♥</span>
+    <br>
+    Powered by <a href="https://hexo.io">Hexo</a> | Theme - <a href="https://github.com/dongyuanxin/theme-bmw">BMW</a>
+    <br>
+  </p>
+</footer>
+
+<script>
+const timeToNowDOM = document.querySelector("#time-to-now");
+const startTimestamp = new Date(2018, 11, 12, 22, 55).getTime();
+
+const updateTimeStr = () => {
+  let offset = parseInt(
+      (new Date().getTime() - startTimestamp) / 1000,
+      10
+    ),
+    day = Math.floor(offset / 86400),
+    hour = Math.floor((offset % 86400) / 3600),
+    minute = Math.floor(((offset % 86400) % 3600) / 60),
+    second = Math.floor(((offset % 86400) % 3600) % 60);
+  timeToNowDOM.innerHTML =
+    day + "天" + hour + "小时" + minute + "分钟" + second + "秒";
+  setTimeout(updateTimeStr, 500);
+}
+
+setTimeout(updateTimeStr, 500);
+</script>
+
+      <div class="back-to-top hidden">
+  <span>
+    <i class="iconfont icon-60"></i><span></span>%
+  </span>
+</div>
+
+<script>
+const updateIconToTop = percent => {
+  let dom = document.querySelector(".back-to-top span span");
+  dom.innerText = percent;
+  if(percent < 1) {
+    document.querySelector(".back-to-top").className = "back-to-top hidden";
+  } else {
+    document.querySelector(".back-to-top").className = "back-to-top";
+  }
+}
+
+const handleScoll = () => {
+  let isRunning = false;
+  return () => {
+    if (isRunning) return;
+    isRunning = true;
+    window.requestAnimationFrame(timestamp => {
+      let scrollTop =
+          document.documentElement.scrollTop || document.body.scrollTop,
+        scrollHeight =
+          document.documentElement.scrollHeight ||
+          document.body.scrollHeight,
+        clientHeight =
+          document.documentElement.clientHeight ||
+          document.body.clientHeight;
+      isRunning = false;
+      if (scrollTop <= 1) {
+        updateIconToTop(0);
+        return;
+      }
+      if (scrollTop + clientHeight >= scrollHeight) {
+        updateIconToTop(100);
+      } else {
+        updateIconToTop(parseInt(
+          100 * scrollTop / (scrollHeight - clientHeight),
+          10
+        ));
+      }
+    });
+  };
+}
+
+const backToTop = () => {
+  let scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop,
+    delay = 10,
+    time = 200;
+  if (scrollTop <= 20) {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    return;
+  }
+  let step = Math.ceil(scrollTop * delay / time);
+  let timer = setInterval(() => {
+    scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop;
+    if (scrollTop - step <= 0) {
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      clearInterval(timer);
+    } else {
+      document.documentElement.scrollTop = scrollTop - step;
+      document.body.scrollTop = scrollTop - step;
+    }
+  }, delay);
+}
+
+document.addEventListener("scroll", handleScoll(), false);
+
+document.querySelector(".back-to-top").addEventListener("click", backToTop, false);
+
+</script>
+
+      <aside id="sidebar">
+        <p id="sidebar-header"></p>
+        <ol id="sidebar-toc"></ol>
+      </aside>
+
+    </div>
+  </body>
+
+</html>
