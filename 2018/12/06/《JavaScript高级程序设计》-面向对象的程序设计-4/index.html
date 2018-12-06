@@ -244,6 +244,12 @@ setTimeout(generateToc, 1000);
       </div>
     
     
+      <div class="nav-next">
+        下一篇:
+        <a href="/2018/12/06/React学习-1-基础/" target="_self">React学习(1)-基础</a>
+        <i class="iconfont icon-next"></i>
+      </div>
+    
   </nav>
 
   <a href="#comment" class="comment-anchor"></a>
@@ -432,7 +438,7 @@ if(true){
 
 <script>
 const timeToNowDOM = document.querySelector("#time-to-now");
-const startTimestamp = new Date(2018, 11, 12, 22, 55).getTime();
+const startTimestamp = new Date('2018-11-12T22:00:00').getTime();
 
 const updateTimeStr = () => {
   let offset = parseInt(
