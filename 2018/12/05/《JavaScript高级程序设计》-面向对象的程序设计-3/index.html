@@ -220,7 +220,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">function inheritPrototype(child,parent)&#123;</span><br><span class="line">    var prototype = object(parent.prototype);</span><br><span class="line">    prototype.constructor = child;</span><br><span class="line">    child.prototype = prototype;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function ParentType(name)&#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.colors = [&apos;red&apos;,&apos;green&apos;,&apos;blue&apos;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ParentType.prototype.sayColor = function()&#123;</span><br><span class="line">    return this.colors;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function ChildType(name,age)&#123;</span><br><span class="line">    ParentType.call(this,name);</span><br><span class="line"></span><br><span class="line">    this.age = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">inheritPrototype(ChildType,ParentType);</span><br><span class="line"></span><br><span class="line">ChildType.prototype.sayAge = function()&#123;</span><br><span class="line">    return this.age</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这种方法只调用了一次父构造函数，也避免了在子类原型对象上创建不必要的、多余的属性。还能保持原型链不变，能正常使用instancof，是引用类型最理想的继承模式。</p>
 <hr>
-<p>JavaScript中的继承就说完了，下一篇是函数表达式</p>
+<p>JavaScript中的继承就说完了，下一篇是函数</p>
       </div>
     </div>
     <div class="copy-right">
@@ -283,6 +283,12 @@ setTimeout(generateToc, 1000);
         <a href="/2018/12/03/《JavaScript高级程序设计》-面向对象的程序设计-2/" target="_self">《JavaScript高级程序设计》---面向对象的程序设计(2)</a>
       </div>
     
+    
+      <div class="nav-next">
+        下一篇:
+        <a href="/2018/12/06/《JavaScript高级程序设计》-面向对象的程序设计-4/" target="_self">《JavaScript高级程序设计》---面向对象的程序设计(4)</a>
+        <i class="iconfont icon-next"></i>
+      </div>
     
   </nav>
 
