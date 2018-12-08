@@ -167,7 +167,56 @@
     </div>
     <div class="article-content">
       <div class="markdown-body">
-        <h2 id="占个坑，待续。。。"><a href="#占个坑，待续。。。" class="headerlink" title="占个坑，待续。。。"></a>占个坑，待续。。。</h2><p>此系列是对<a href="http://product.dangdang.com/25249546.html" target="_blank" rel="noopener">《React 进阶之路》</a>所做的学习笔记。大家有兴趣可通过连接购买学习。</p>
+        <h2 id="初始react"><a href="#初始react" class="headerlink" title="初始react"></a>初始react</h2><h3 id="react特点"><a href="#react特点" class="headerlink" title="react特点"></a>react特点</h3><ul>
+<li>声明式的实图层</li>
+<li>简单的更新流程</li>
+<li>灵活的渲染体现</li>
+<li>高效的DOM操作</li>
+</ul>
+<p>react更关注的是根据状态创建可复用的UI组件，根据组件创建可组合的UI。</p>
+<h3 id="ES6-语法"><a href="#ES6-语法" class="headerlink" title="ES6 语法"></a>ES6 语法</h3><p>在react中ES6语法是工作时有效的利器。</p>
+<ul>
+<li>let、const用来声明变量，是块级作用域。</li>
+<li>尖头函数<code>() =&gt; { }</code> 其内部的this指向函数定义时所在的上下文对象，而不是执行时的上下文对象。</li>
+<li>模版字符串，完全可以用来替换引号。可以换行，输入变量功能强大</li>
+<li>解构赋值 可以简化赋值时的过程</li>
+<li>rest参数 在函数的形参中<code>...变量名</code>可以用来获取多余参数</li>
+<li>扩展运算符 </li>
+<li>class 可以让原型写法更简单</li>
+<li>import、export 提供模块化功能</li>
+</ul>
+<h3 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h3><p>create-react-app 用来快速创建项目的脚手架工具</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create-react-app my-app</span><br><span class="line">cd my-app</span><br><span class="line">npm start</span><br></pre></td></tr></table></figure>
+<p>这样就创建运行了你的第一个react项目。</p>
+<h2 id="react-基础"><a href="#react-基础" class="headerlink" title="react 基础"></a>react 基础</h2><h3 id="JSX-语法"><a href="#JSX-语法" class="headerlink" title="JSX 语法"></a>JSX 语法</h3><p>JSX是用来描述UI的JS扩展语法</p>
+<h4 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const el = (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;h1&gt;Hello&lt;/h1&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h4 id="标签类型"><a href="#标签类型" class="headerlink" title="标签类型"></a>标签类型</h4><ul>
+<li>DOM类标签，首字母小写</li>
+<li>React组件类标签，首字母大写</li>
+</ul>
+<p>react是根据首字母大小写来判断渲染的是一个什么类型的标签。</p>
+<h4 id="Javascript表达式"><a href="#Javascript表达式" class="headerlink" title="Javascript表达式"></a>Javascript表达式</h4><p>在JSX中使用JS表达式需要用<code>{}</code>包起来，主要使用场景有两个：给标签属性赋值和通过表达式定义子组件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const el = &lt;MyComponent foo = &#123; 1 + 2&#125; /&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const todos = [&apos;item1&apos;,&apos;item2&apos;,&apos;item3&apos;];</span><br><span class="line">const el = (</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">        &#123;todos.map(message =&gt; &lt;Item key=&#123;message&#125; message=&#123;message&#125; /&gt;)&#125;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>下面写法是错误的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const ele = &lt;Mycomponent foo=&#123;const val = 1 + 2; return val;&#125;&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">let complete;</span><br><span class="line">const ele = (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &#123;</span><br><span class="line">            if(complete)&#123;</span><br><span class="line">                return &lt;CompletedList /&gt;;</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                return null</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：不能使用多行JavaScript语句,可以使用逻辑与或者三元运算符代替if语句</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let complete;</span><br><span class="line">const ele = (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &#123;</span><br><span class="line">            complete?&lt;CompletedList /&gt;:null</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let complete;</span><br><span class="line">const ele = (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &#123;</span><br><span class="line">            complete &amp;&amp; &lt;CompletedList /&gt;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h4 id="标签属性"><a href="#标签属性" class="headerlink" title="标签属性"></a>标签属性</h4><p>JSX标签中DOM标签除了事件属性名和class有变化其它的没变。 React组件的属性可以自定义任意属性。</p>
+<h3 id="组建的概念及使用"><a href="#组建的概念及使用" class="headerlink" title="组建的概念及使用"></a>组建的概念及使用</h3><p>组件是React的核心概念，定义一个组件有两种方式：使用ES6和使用函数。</p>
+<p>使用class定义组件需要满足两个条件：</p>
+<ol>
+<li>class继承自React.Component</li>
+<li>内部必须有render方法，render返回代表该组件UI的React元素。</li>
+</ol>
+<hr>
+<p>未完待续。。。</p>
+<h3 id="列表渲染"><a href="#列表渲染" class="headerlink" title="列表渲染"></a>列表渲染</h3><h3 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h3><h3 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h3><hr>
+<p>此系列是对<a href="http://product.dangdang.com/25249546.html" target="_blank" rel="noopener">《React 进阶之路》</a>所做的学习笔记。大家有兴趣可通过连接购买学习。</p>
       </div>
     </div>
     <div class="copy-right">
