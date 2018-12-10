@@ -172,12 +172,15 @@
 <li>ngrok，ngrok 是一个反向代理，通过在公共端点和本地运行的 Web 服务器之间建立一个安全的通道，实现内网主机的服务可以暴露给外网。</li>
 <li>frp GitHub上的项目，绝对简单好用，当然你得有一个有公网IP的服务器才行。</li>
 <li><a href="https://github.com/localtunnel/localtunnel" target="_blank" rel="noopener">localtunnel</a> 一个用js写的内网穿透服务，可以连接自己的服务器。</li>
+<li><a href="https://serveo.net" target="_blank" rel="noopener">serveo</a> 免费简单</li>
 </ul>
 <p>免费的服务商有很多，缺点就是访问速度慢，不稳定。</p>
 <p>如果有自己的公网服务器推荐frp/ngrok，ngrok, 没有的话使用localtunnel。</p>
-<h2 id="localtunnel-使用"><a href="#localtunnel-使用" class="headerlink" title="localtunnel 使用"></a>localtunnel 使用</h2><p>优点：简单，方便<br>缺点：公共域名，速度慢</p>
+<h2 id="localtunnel"><a href="#localtunnel" class="headerlink" title="localtunnel"></a>localtunnel</h2><p>优点：简单，方便<br>缺点：公共域名，速度慢</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g localtunnel</span><br></pre></td></tr></table></figure>
 <h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lt --port 本地服务端口</span><br></pre></td></tr></table></figure>
+<h2 id="serveo"><a href="#serveo" class="headerlink" title="serveo"></a>serveo</h2><p>优点：简单，方便,支持自主服务器<br>缺点：公共域名，速度慢</p>
+<h3 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -R 80:localhost:3000 serveo.net</span><br></pre></td></tr></table></figure>
 <hr>
 <p>待更新。。</p>
 <h2 id="frp-使用"><a href="#frp-使用" class="headerlink" title="frp 使用"></a>frp 使用</h2>
