@@ -181,9 +181,10 @@
 <h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lt --port 本地服务端口</span><br></pre></td></tr></table></figure>
 <h2 id="serveo"><a href="#serveo" class="headerlink" title="serveo"></a>serveo</h2><p>优点：简单，方便,支持自主服务器<br>缺点：公共域名，速度慢</p>
 <h3 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -R 80:localhost:3000 serveo.net</span><br></pre></td></tr></table></figure>
-<hr>
-<p>待更新。。</p>
-<h2 id="frp-使用"><a href="#frp-使用" class="headerlink" title="frp 使用"></a>frp 使用</h2>
+<h2 id="frp-使用"><a href="#frp-使用" class="headerlink" title="frp 使用"></a>frp 使用</h2><h3 id="远端frps设置"><a href="#远端frps设置" class="headerlink" title="远端frps设置"></a>远端frps设置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line"># frp点对点端口</span><br><span class="line">bind_port = 7000  </span><br><span class="line"># frp服务端口，应避免80常用端口</span><br><span class="line">vhost_http_port = 80</span><br></pre></td></tr></table></figure>
+<p>运行frps <code>nohup ./frps -c ./frps.ini &amp;</code></p>
+<h3 id="本地frpc设置"><a href="#本地frpc设置" class="headerlink" title="本地frpc设置"></a>本地frpc设置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line"># 远端服务器地址</span><br><span class="line">server_addr = *.*.*.*</span><br><span class="line"># frp服务对应端口</span><br><span class="line">server_port = 7000</span><br><span class="line"></span><br><span class="line">[web]</span><br><span class="line">type = http</span><br><span class="line"># 本地项目地址</span><br><span class="line">local_port = 4000</span><br><span class="line"># 设置访问域名</span><br><span class="line">custom_domains = frp.****.****</span><br></pre></td></tr></table></figure>
+<p>运行frps <code>./frpc -c ./frpc.ini &amp;</code></p>
       </div>
     </div>
     <div class="copy-right">
