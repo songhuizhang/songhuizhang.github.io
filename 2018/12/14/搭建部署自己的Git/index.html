@@ -8,12 +8,12 @@
   
   
   
-  <title>ionic4--初体验 | 橙汁菌的小屋</title>
+  <title>搭建部署自己的Git | 橙汁菌的小屋</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="移动开发,ionic4,混合开发,">
+    <meta name="keywords" content="服务器,部署私有Git,">
   
 
   
@@ -146,49 +146,62 @@
 <div>
   <div class="post">
     <h1 class="article-title">
-      <span>ionic4--初体验</span>
+      <span>搭建部署自己的Git</span>
     </h1>
     <div class="article-top-meta">
       <span>
         发布 : 
-        2018-12-11
+        2018-12-14
       </span>
       <span>
         分类 : 
           
-            <a href="/categories/移动开发/">
-              移动开发
+            <a href="/categories/服务器/">
+              服务器
             </a>
           
       </span>
       <span>
-        浏览 : <span class="article-timer" data-identity="ionic4-初体验"></span>
+        浏览 : <span class="article-timer" data-identity="搭建部署自己的Git"></span>
       </span>
     </div>
     <div class="article-content">
       <div class="markdown-body">
-        <h2 id="ionic4"><a href="#ionic4" class="headerlink" title="ionic4"></a>ionic4</h2><p>和ionic3有较大的变化，更加贴合于Angular的开发模式，熟悉Angular的上手非常块。</p>
-<h2 id="先说一个坑"><a href="#先说一个坑" class="headerlink" title="先说一个坑"></a>先说一个坑</h2><p>在个人没有开发者账号的时候，需要ios真机调试时出现的一个坑！！！找了很多但是还是一直有问题。</p>
-<p>问题：</p>
-<p>连接真机调试，点击运行报错 <strong>app installation failed a valid provisioning profile for this executable was not found！</strong></p>
-<p>解决方法：</p>
-<ol>
-<li>打开Xcode的File 》 Project Settings…</li>
-<li>将Shared Project Settings 的 Build system 设置为 Legacy Build System</li>
-<li>再次选择调试设备，运行</li>
-<li>成功！</li>
-</ol>
-<p>如图：</p>
-<p><img src="https://s1.ax1x.com/2018/12/11/FYdfVe.png" alt="FYdfVe.png"></p>
+        <h2 id="Gogs-介绍"><a href="#Gogs-介绍" class="headerlink" title="Gogs 介绍"></a>Gogs 介绍</h2><p>官方介绍：一款极易搭建的自助 Git 服务。</p>
+<p>官网➡️ <a href="https://gogs.io/" target="_blank" rel="noopener">gogs</a></p>
+<h2 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h2><p>开始安装之前需要你有一个自己的服务器，这里我推荐使用<a href="https://www.vultr.com/?ref=7319391" target="_blank" rel="noopener">vultr</a>（按分钟收费，随用随开）。最便宜的只要每月2.5$！！不过推荐大家使用IPv4的3.5$每月。</p>
+<p>这里假设大家都有了。</p>
+<h2 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h2><p>如图，我们进入gogs官网，选择二进制安装。</p>
+<p><img src="https://s1.ax1x.com/2018/12/14/FUahMq.jpg" alt="FUahMq.jpg"></p>
+<p>更具自己的服务器，复制对应的下载链接。</p>
+<p><img src="https://s1.ax1x.com/2018/12/14/FUabi4.jpg" alt="FUabi4.jpg"></p>
+<h2 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h2><p>进入浏览器，下载对应的压缩文件。</p>
+<p><code>wget https://dl.gogs.io/0.11.79/gogs_0.11.79_linux_amd64.zip</code></p>
+<p>解压缩对应的文件</p>
+<p><code>unzip gogs_0.11.79_linux_amd64.zip</code></p>
+<p>进入对应目录</p>
+<p><code>cd gogs_0.11.79_linux_amd64</code></p>
+<p>执行</p>
+<p><code>./gogs web</code></p>
+<h2 id="第四步"><a href="#第四步" class="headerlink" title="第四步"></a>第四步</h2><p>安装成功后，在浏览器打开你服务器的3000端口。</p>
+<p>如图先选择自己的服务器，建议直接使用 SQLite3 <strong>无需安装</strong></p>
+<p><img src="https://s1.ax1x.com/2018/12/14/FUdVyt.jpg" alt="FUdVyt.jpg"></p>
+<p>之后按照下入进行设置</p>
+<p><img src="https://s1.ax1x.com/2018/12/14/FUdQYQ.jpg" alt="FUdQYQ.jpg"></p>
+<p>用户名需要使用服务器用户 我直接用的root</p>
+<p>域名改写为服务器ip</p>
+<p>应用url中的localhost改写为服务器ip</p>
+<p>之后点击完成</p>
+<h2 id="第五步"><a href="#第五步" class="headerlink" title="第五步"></a>第五步</h2><p>注册用户名，密码。（第一个注册的会默认为管理员账号）</p>
 <hr>
-<p>关于ionic的使用，后续更新。。。</p>
+<p>到此你自己的git服务就搭建部署完成，隐私的东东再也不怕没地方放了。</p>
       </div>
     </div>
     <div class="copy-right">
       <div class="markdown-body">
         <blockquote>
         <p>本文作者：橙汁菌<br>
-        本文链接： <a href="">https://songhuizhang.github.io/2018/12/11/ionic4-初体验/</a><br>
+        本文链接： <a href="">https://songhuizhang.github.io/2018/12/14/搭建部署自己的Git/</a><br>
         版权声明： 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</p>
         </blockquote>
       </div>
@@ -200,14 +213,8 @@
           
             
             <span class="span--tag">
-              <a href="/tags/ionic4/">
-                #ionic4
-              </a>
-            </span>
-            
-            <span class="span--tag">
-              <a href="/tags/混合开发/">
-                #混合开发
+              <a href="/tags/部署私有Git/">
+                #部署私有Git
               </a>
             </span>
             
@@ -229,15 +236,9 @@ setTimeout(generateToc, 1000);
       <div class="nav-pre">
         <i class="iconfont icon-prev"></i>
         上一篇:
-        <a href="/2018/12/10/内网穿透/" target="_self">内网穿透</a>
+        <a href="/2018/12/11/ionic4-初体验/" target="_self">ionic4--初体验</a>
       </div>
     
-    
-      <div class="nav-next">
-        下一篇:
-        <a href="/2018/12/14/搭建部署自己的Git/" target="_self">搭建部署自己的Git</a>
-        <i class="iconfont icon-next"></i>
-      </div>
     
   </nav>
 
